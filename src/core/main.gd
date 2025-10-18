@@ -20,6 +20,8 @@ func _ready() -> void:
 	SignalBus.swap_view.connect(swap_view)
 
 func _process(delta: float) -> void:
+	zoo.BackgroundTick(delta)
+	
 	match my_game_view:
 		GameView.PLINKO:
 			plinko.Tick(delta)

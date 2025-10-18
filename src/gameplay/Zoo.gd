@@ -25,8 +25,12 @@ func UpdateInput(event : InputEvent) -> void:
 		enclosure.UpdateInput(event)
 
 func Tick(delta : float) -> void:
+	pass
+
+func BackgroundTick(delta : float) -> void:
 	for patron : Patron in patrons:
 		patron.Tick(delta)
+	 
 
 
 

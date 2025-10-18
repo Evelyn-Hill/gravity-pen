@@ -1,14 +1,33 @@
-[gd_scene load_steps=5 format=3 uid="uid://nkbmpwpbnoft"]
+[gd_scene load_steps=9 format=3 uid="uid://nkbmpwpbnoft"]
 
 [ext_resource type="Script" uid="uid://cjpwbnc1uo2lh" path="res://src/gameplay/PlinkoBoard.gd" id="1_y80ct"]
 [ext_resource type="PackedScene" uid="uid://bdj5j41q1dpht" path="res://scenes/gameplay/plinko/plinko_goal.tscn" id="2_3v5wk"]
+[ext_resource type="Script" uid="uid://bq0gkw5r3xwvy" path="res://src/util/MouseParralax.gd" id="2_ymppl"]
+[ext_resource type="Texture2D" uid="uid://c3sba5ffruclo" path="res://assets/gameplay/spaceBG.bmp" id="3_6kuqd"]
 [ext_resource type="PackedScene" uid="uid://bbe0a8m6wp37u" path="res://scenes/gameplay/pen_tool.tscn" id="3_ii6o4"]
+[ext_resource type="Texture2D" uid="uid://xybiv18vfj6s" path="res://assets/gameplay/spaceBG.streaks.png" id="4_bhtri"]
+[ext_resource type="Texture2D" uid="uid://cvvhp8n48ncum" path="res://assets/gameplay/spaceBG.planets.png" id="5_gd5cq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y80ct"]
 size = Vector2(20, 1084)
 
 [node name="Plinko" type="Node2D"]
 script = ExtResource("1_y80ct")
+
+[node name="Background" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_ymppl")
+parralax_amount_pixels = Array[float]([0.0, 75.0, 150.0])
+parralax_speed = Array[float]([0.0, 0.2, 0.3])
+
+[node name="Static" type="Sprite2D" parent="Background"]
+texture = ExtResource("3_6kuqd")
+
+[node name="Layer1" type="Sprite2D" parent="Background"]
+texture = ExtResource("4_bhtri")
+
+[node name="Layer2" type="Sprite2D" parent="Background"]
+texture = ExtResource("5_gd5cq")
 
 [node name="PenTool" parent="." instance=ExtResource("3_ii6o4")]
 unique_name_in_owner = true

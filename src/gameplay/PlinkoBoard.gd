@@ -15,6 +15,7 @@ const peg_colors : Array[Color] = [
 ]
 
 @onready var pen_tool : PenTool = %PenTool
+@onready var bacground : MouseParralax = %Background
 
 var aliens : Array[Alien] 
 
@@ -52,10 +53,10 @@ func generate_board() -> void:
 	
 func UpdateInput(event : InputEvent) -> void:
 	pen_tool.UpdateInput(event)
+	bacground.UpdateInput(event)
 
 func Tick(delta : float) -> void:
 	pen_tool.Tick(delta)
+	bacground.Tick(delta)
 	for alien : Alien in aliens:
 		alien.Tick(delta)
-
-
