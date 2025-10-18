@@ -15,5 +15,16 @@ func _ready() -> void:
 		enclosures.append(enclosure)
 
 	var patron : Patron = PATRON_SCENE.instantiate()
-	paths.pick_random().add_child(patron)	
+	paths.pick_random().add_child(patron)
+
+
+func UpdateInput(event : InputEvent) -> void:
+	pass
+
+func Tick(delta : float) -> void:
+	pass
+
+func UpdateDraw() -> void:
+	pass
+
 

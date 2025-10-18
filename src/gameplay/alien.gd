@@ -30,7 +30,7 @@ var my_alien_type : AlienType = AlienType.BORING
 var direction : Vector2 = Vector2(1, 0)
 var released : bool = false
 
-func _process(delta: float) -> void:
+func Tick(delta: float) -> void:
 	if released:
 		return
 

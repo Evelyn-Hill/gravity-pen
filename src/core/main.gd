@@ -13,33 +13,28 @@ static var my_game_view : GameView = GameView.PLINKO
 static var game_state : GameState = GameState.new()
 
 @export var plinko : PlinkoBoard
-@export var zoo : Node2D
+@export var zoo : Zoo
 
 func _ready() -> void:
 	print("Hello, Gravity Pen")
 	SignalBus.swap_view.connect(swap_view)
 
-
-
 func _process(delta: float) -> void:
 	match my_game_view:
 		GameView.PLINKO:
+			plinko.Tick(delta)
 			pass
 		GameView.ZOO:
+			zoo.Tick(delta)
 			pass
 
 func _input(event: InputEvent) -> void:
 	match my_game_view:
 		GameView.PLINKO:
+			plinko.UpdateInput(event)
 			pass
 		GameView.ZOO:
-			pass
-
-func _draw() -> void:
-	match my_game_view:
-		GameView.PLINKO:
-			pass
-		GameView.ZOO:
+			zoo.UpdateInput(event)
 			pass
 	
 		

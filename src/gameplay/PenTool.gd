@@ -19,7 +19,7 @@ var attack_enabled : bool = true
 
 @onready var particles = get_node("Particles")
 
-func _input(event: InputEvent) -> void:
+func UpdateInput(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		start_position = event.position - (get_viewport_rect().size * 0.5)
 		if start_position.x > 730 and start_position.y < -400:
@@ -41,7 +41,7 @@ func find_objects_in_circle() -> Array[Node]:
 	
 	return result
 
-func _process(delta: float) -> void:
+func Tick(delta: float) -> void:
 	if Main.my_game_view != Main.GameView.PLINKO:
 		attack_enabled = false
 		is_selecting = false

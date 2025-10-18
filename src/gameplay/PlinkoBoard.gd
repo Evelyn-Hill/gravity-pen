@@ -3,6 +3,7 @@ extends Node2D
 
 const PLINKO_PIECE := preload("res://scenes/gameplay/plinko/plinko_peg.tscn")
 const PLINKO_PIECE_SIZE : Vector2 = Vector2(64, 64)
+const ALIEN_SCENE := preload("res://scenes/gameplay/aliens/alien.tscn")
 
 var grid_positions : Array[Vector2]
 
@@ -13,8 +14,16 @@ const peg_colors : Array[Color] = [
 	Color.BLUE
 ]
 
+@onready var pen_tool : PenTool = %PenTool
+
+var aliens : Array[Alien] 
+
 func _ready() -> void:
 	generate_board()
+	var alien : Alien = ALIEN_SCENE.instantiate()
+	aliens.append(alien)
+	add_child(alien)
+
 
 func generate_board() -> void:
 	var screen_size : Vector2 = get_viewport_rect().size
@@ -40,3 +49,13 @@ func generate_board() -> void:
 			add_child(piece)	
 
 	#queue_redraw()
+	
+func UpdateInput(event : InputEvent) -> void:
+	pen_tool.UpdateInput(event)
+
+func Tick(delta : float) -> void:
+	pen_tool.Tick(delta)
+	for alien : Alien in aliens:
+		alien.Tick(delta)
+
+

@@ -1,13 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://nkbmpwpbnoft"]
+[gd_scene load_steps=5 format=3 uid="uid://nkbmpwpbnoft"]
 
 [ext_resource type="Script" uid="uid://cjpwbnc1uo2lh" path="res://src/gameplay/PlinkoBoard.gd" id="1_y80ct"]
 [ext_resource type="PackedScene" uid="uid://bdj5j41q1dpht" path="res://scenes/gameplay/plinko/plinko_goal.tscn" id="2_3v5wk"]
+[ext_resource type="PackedScene" uid="uid://bbe0a8m6wp37u" path="res://scenes/gameplay/pen_tool.tscn" id="3_ii6o4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y80ct"]
 size = Vector2(20, 1084)
 
 [node name="Plinko" type="Node2D"]
 script = ExtResource("1_y80ct")
+
+[node name="PenTool" parent="." instance=ExtResource("3_ii6o4")]
+unique_name_in_owner = true
 
 [node name="EdgeLeft" type="StaticBody2D" parent="."]
 position = Vector2(-1000, 0)
