@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://dpio6p7g4fwp3"]
+
+[ext_resource type="Script" uid="uid://bpq4s08bnspwu" path="res://src/core/main.gd" id="1_2dmjg"]
+[ext_resource type="Script" uid="uid://bknco5ltjlr61" path="res://src/gameplay/PenTool.gd" id="2_b6u03"]
+[ext_resource type="PackedScene" uid="uid://cdipnnmm26ws3" path="res://scenes/gameplay/aliens/alien.tscn" id="3_ebys2"]
+[ext_resource type="PackedScene" uid="uid://nkbmpwpbnoft" path="res://scenes/gameplay/plinko/plinko.tscn" id="4_b6u03"]
+
+[node name="main" type="Node2D"]
+script = ExtResource("1_2dmjg")
+
+[node name="PenTool" type="Node2D" parent="."]
+script = ExtResource("2_b6u03")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Alien" parent="." instance=ExtResource("3_ebys2")]
+position = Vector2(-722, -195)
+
+[node name="Plinko" parent="." instance=ExtResource("4_b6u03")]

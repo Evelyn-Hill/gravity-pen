@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdipnnmm26ws3"]
+
+[ext_resource type="Texture2D" uid="uid://cd3r3hec8xqi6" path="res://assets/icon.svg" id="1_4w6pr"]
+[ext_resource type="Script" uid="uid://dtys2clwmwayp" path="res://src/gameplay/alien.gd" id="1_x3rhd"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x3rhd"]
+bounce = 0.5
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x3rhd"]
+size = Vector2(44, 44)
+
+[node name="Alien" type="RigidBody2D" groups=["selectable"]]
+physics_material_override = SubResource("PhysicsMaterial_x3rhd")
+gravity_scale = 0.0
+script = ExtResource("1_x3rhd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_x3rhd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("1_4w6pr")
