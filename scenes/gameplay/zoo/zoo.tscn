@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cqsntrp3afljc"]
+[gd_scene load_steps=8 format=3 uid="uid://cqsntrp3afljc"]
 
 [ext_resource type="Texture2D" uid="uid://bpnau5b4sd33d" path="res://assets/gameplay/zoo/zooBG.bmp" id="1_huu4n"]
+[ext_resource type="Script" uid="uid://d3it0g1bvq531" path="res://src/gameplay/Zoo.gd" id="1_u70kq"]
 [ext_resource type="PackedScene" uid="uid://cohsadqh0vfur" path="res://scenes/gameplay/zoo/Enclosure.tscn" id="2_q8qts"]
 
 [sub_resource type="Curve2D" id="Curve2D_huu4n"]
@@ -9,15 +10,47 @@ _data = {
 }
 point_count = 15
 
-[node name="Zoo" type="Node2D"]
+[sub_resource type="Curve2D" id="Curve2D_u70kq"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 876, 464, 0, 0, 0, 0, 548, 314, 0, 0, 0, 0, 323, 438, 0, 0, 0, 0, 117, 314, 0, 0, 0, 0, -110, 423, 0, 0, 0, 0, -341, 301, 0, 0, 0, 0, -556, 432, 0, 0, 0, 0, -770, 310, 0, 0, 0, 0, -768, 50, 0, 0, 0, 0, -536, -74, 0, 0, 0, 0, -569, -325, 0, 0, 0, 0, -875, -455)
+}
+point_count = 12
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[sub_resource type="Curve2D" id="Curve2D_j7535"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 881, 468, 0, 0, 0, 0, 548, 308, 0, 0, 0, 0, 548, 59, 0, 0, 0, 0, 351, -44, 0, 0, 0, 0, 323, -312, 0, 0, 0, 0, 107, -428, 0, 0, 0, 0, -114, -310, 0, 0, 0, 0, -324, -428, 0, 0, 0, 0, -551, -312, 0, 0, 0, 0, -884, -458)
+}
+point_count = 10
+
+[sub_resource type="Curve2D" id="Curve2D_wmvqi"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 883, 470, 0, 0, 0, 0, 552, 316, 0, 0, 0, 0, 320, 440, 0, 0, 0, 0, 113, 312, 0, 0, 0, 0, 104, 57, 0, 0, 0, 0, 350, -47, 0, 0, 0, 0, 318, -320, 0, 0, 0, 0, 557, -428, 0, 0, 0, 0, 761, -302, 0, 0, 0, 0, 759, -60, 0, 0, 0, 0, 549, 55, 0, 0, 0, 0, 354, -46, 0, 0, 0, 0, 104, 57, 0, 0, 0, 0, -96, -53, 0, 0, 0, 0, -123, -306, 0, 0, 0, 0, -323, -426, 0, 0, 0, 0, -559, -315, 0, 0, 0, 0, -876, -458)
+}
+point_count = 18
+
+[node name="Zoo" type="Node2D"]
+script = ExtResource("1_u70kq")
+
+[node name="Background" type="Sprite2D" parent="."]
 texture = ExtResource("1_huu4n")
 
-[node name="Path2D" type="Path2D" parent="."]
+[node name="Paths" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Path1" type="Path2D" parent="Paths"]
 curve = SubResource("Curve2D_huu4n")
 
+[node name="Path2" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_u70kq")
+
+[node name="Path3" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_j7535")
+
+[node name="Path4" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_wmvqi")
+
 [node name="Enclosures" type="Node2D" parent="."]
+unique_name_in_owner = true
 
 [node name="Enclosure1" parent="Enclosures" instance=ExtResource("2_q8qts")]
 position = Vector2(-111, 186)

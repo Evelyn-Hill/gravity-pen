@@ -56,3 +56,6 @@ func get_enclosure_score() -> int:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("click") and mouse_inside:
 		%BuyMenu.visible = !%BuyMenu.visible
+		for n in get_parent().get_children():
+			if n != self:
+				n.get_node("%BuyMenu").hide()

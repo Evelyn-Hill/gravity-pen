@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3rmf55uq6il"]
+
+[ext_resource type="Script" uid="uid://ctgth7e0ml8bq" path="res://src/gameplay/Patron.gd" id="1_klcm7"]
+[ext_resource type="Texture2D" uid="uid://cd3r3hec8xqi6" path="res://assets/icon.svg" id="1_ulcb7"]
+
+[node name="Patron" type="PathFollow2D"]
+loop = false
+script = ExtResource("1_klcm7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.18749999, 0.18749999)
+texture = ExtResource("1_ulcb7")

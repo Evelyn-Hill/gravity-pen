@@ -18,6 +18,7 @@ config/icon="res://assets/icon.svg"
 [autoload]
 
 SignalBus="*res://src/core/SignalBus.gd"
+MusicPlayer="*res://src/util/MusicPlayer.gd"
 
 [display]
 
