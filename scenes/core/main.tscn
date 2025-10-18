@@ -1,9 +1,34 @@
-[gd_scene load_steps=5 format=3 uid="uid://dpio6p7g4fwp3"]
+[gd_scene load_steps=7 format=3 uid="uid://dpio6p7g4fwp3"]
 
 [ext_resource type="Script" uid="uid://bpq4s08bnspwu" path="res://src/core/main.gd" id="1_2dmjg"]
 [ext_resource type="Script" uid="uid://bknco5ltjlr61" path="res://src/gameplay/PenTool.gd" id="2_b6u03"]
 [ext_resource type="PackedScene" uid="uid://cdipnnmm26ws3" path="res://scenes/gameplay/aliens/alien.tscn" id="3_ebys2"]
 [ext_resource type="PackedScene" uid="uid://nkbmpwpbnoft" path="res://scenes/gameplay/plinko/plinko.tscn" id="4_b6u03"]
+[ext_resource type="Shader" uid="uid://c3uds5hq2y078" path="res://src/shaders/CRT.gdshader" id="5_ebys2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jvmw0"]
+shader = ExtResource("5_ebys2")
+shader_parameter/overlay = false
+shader_parameter/scanlines_opacity = 0.02000000095
+shader_parameter/scanlines_width = 0.0
+shader_parameter/grille_opacity = 0.010000000475
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = true
+shader_parameter/roll = true
+shader_parameter/roll_speed = 2.0
+shader_parameter/roll_size = 0.010000000475
+shader_parameter/roll_variation = 1.2620000566851202
+shader_parameter/distort_intensity = 0.02000000095
+shader_parameter/noise_opacity = 0.0
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.050000002375
+shader_parameter/aberration = 4.7499999933364734e-08
+shader_parameter/brightness = 1.31
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 0.102000004845
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.26
+shader_parameter/vignette_opacity = 0.53200002527
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_2dmjg")
@@ -17,3 +42,14 @@ script = ExtResource("2_b6u03")
 position = Vector2(-722, -195)
 
 [node name="Plinko" parent="." instance=ExtResource("4_b6u03")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_jvmw0")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

@@ -6,6 +6,13 @@ const PLINKO_PIECE_SIZE : Vector2 = Vector2(64, 64)
 
 var grid_positions : Array[Vector2]
 
+
+const peg_colors : Array[Color] = [
+	Color.RED,
+	Color.GREEN,
+	Color.BLUE
+]
+
 func _ready() -> void:
 	generate_board()
 
@@ -29,6 +36,7 @@ func generate_board() -> void:
 		if i % 2 == 0:
 			var piece = PLINKO_PIECE.instantiate()
 			piece.position = grid_positions[i]
+			piece.modulate = peg_colors[i % peg_colors.size()]
 			add_child(piece)	
 
 	#queue_redraw()

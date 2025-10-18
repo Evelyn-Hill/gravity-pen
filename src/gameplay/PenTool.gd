@@ -10,11 +10,17 @@ var select_timer : float = 0.0
 
 var selection_frames : Array[Array]
 
+var circle_color : Color = Color(1, 1, 1, 0.2)
+
+var arc_inside_color: Color = Color(1, 0, 0, 1)
+var inside_radius : float = 0
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		start_position = event.position - (get_viewport_rect().size * 0.5)
 
 	if event.is_action_pressed("click") and is_selecting == false:
+		animate_cirlce()
 		is_selecting = true
 
 func find_objects_in_circle() -> Array[Node]:
@@ -65,16 +71,35 @@ func find_selected_node(data: Dictionary[Node, int]) -> Node:
 		return best_node
 	else:
 		return null
-	
 
 
+func animate_cirlce() -> void:
+	animate_arc(select_time)
+	var tween : Tween = get_tree().create_tween().parallel()
+	tween.tween_property(self, "circle_color", Color(1, 0, 0, 0.2), select_time)	
+	tween.finished.connect(func(): circle_color = Color(1, 1, 1, 0.2), CONNECT_ONE_SHOT)
+
+	pass
+
+func animate_arc(time : float) -> void:
+	if time < 0.001:
+		return
+
+	var new_time : float = time / 2
+	var tween2 : Tween = get_tree().create_tween()
+	tween2.tween_property(self, "inside_radius", radius, new_time)
+	tween2.finished.connect(func(): 
+		inside_radius = 0.0
+		animate_arc(new_time), CONNECT_ONE_SHOT)
 
 func _draw() -> void:
 	var center = start_position
 		# Optional: Draw a translucent, filled circle
-	draw_circle(center, radius, Color(1, 1, 1, 0.2))
-		# Draw a yellow outline
-	draw_arc(center, radius, 0, PI * 2, 64, Color.YELLOW, 2.0)
+	draw_circle(center, radius, circle_color)
+	draw_arc(center, inside_radius, 0, PI * 2, 64, arc_inside_color, 2.0)
+
+	# Draw a yellow outline
+	draw_arc(center, radius, 0, PI * 2, 64, Color.RED, 2.0)
 		
 
 func cull_points(packed_array: PackedVector2Array) -> PackedVector2Array:

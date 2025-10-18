@@ -8,9 +8,9 @@ enum AlienType {
 }
 
 # --- Look up tables ---
-const ALIEN_SCORES : Array[int] = [1, 3, 10]
+const ALIEN_SCORES : Array[int] = [1, 3, 5]
 
-const ALIEN_MOVE_SPEED : Array[float] = [50, 50, 125]
+const ALIEN_MOVE_SPEED : Array[float] = [150, 300, 400]
 
 # Contain paths to alien visual scenes.
 const ALIEN_VISUALS : Array[String] = [
@@ -18,10 +18,10 @@ const ALIEN_VISUALS : Array[String] = [
 ]
 
 const amplitudes : Array[float] = [
-	5, 5, 5
+	2, 2, 2
 ]
 const frequencies : Array[float] = [
-	5, 5, 5
+	1, 2, 1
 ]
 
 

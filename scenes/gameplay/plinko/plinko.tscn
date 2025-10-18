@@ -23,31 +23,16 @@ shape = SubResource("RectangleShape2D_y80ct")
 
 [node name="PlinkoGoal2" parent="." instance=ExtResource("2_3v5wk")]
 position = Vector2(-443, 329)
-reward = 3
-
-[node name="PlinkoGoal4" parent="." instance=ExtResource("2_3v5wk")]
-position = Vector2(-317, 329)
-
-[node name="PlinkoGoal8" parent="." instance=ExtResource("2_3v5wk")]
-position = Vector2(-317, 329)
-
-[node name="PlinkoGoal3" parent="." instance=ExtResource("2_3v5wk")]
-position = Vector2(-194, 330)
+reward = 1
 
 [node name="PlinkoGoal7" parent="." instance=ExtResource("2_3v5wk")]
 position = Vector2(-64, 330)
-reward = 5
+reward = 3
 
 [node name="PlinkoGoal9" parent="." instance=ExtResource("2_3v5wk")]
 position = Vector2(67, 328)
-reward = 5
+reward = 3
 
 [node name="PlinkoGoal5" parent="." instance=ExtResource("2_3v5wk")]
 position = Vector2(458, 326)
-reward = 3
-
-[node name="PlinkoGoal6" parent="." instance=ExtResource("2_3v5wk")]
-position = Vector2(208, 328)
-
-[node name="PlinkoGoal10" parent="." instance=ExtResource("2_3v5wk")]
-position = Vector2(330, 327)
+reward = 1
