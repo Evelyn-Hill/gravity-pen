@@ -1,10 +1,27 @@
-[gd_scene load_steps=7 format=3 uid="uid://dpio6p7g4fwp3"]
+[gd_scene load_steps=10 format=3 uid="uid://dpio6p7g4fwp3"]
 
 [ext_resource type="Script" uid="uid://bpq4s08bnspwu" path="res://src/core/main.gd" id="1_2dmjg"]
 [ext_resource type="Script" uid="uid://bknco5ltjlr61" path="res://src/gameplay/PenTool.gd" id="2_b6u03"]
 [ext_resource type="PackedScene" uid="uid://cdipnnmm26ws3" path="res://scenes/gameplay/aliens/alien.tscn" id="3_ebys2"]
 [ext_resource type="PackedScene" uid="uid://nkbmpwpbnoft" path="res://scenes/gameplay/plinko/plinko.tscn" id="4_b6u03"]
 [ext_resource type="Shader" uid="uid://c3uds5hq2y078" path="res://src/shaders/CRT.gdshader" id="5_ebys2"]
+[ext_resource type="Script" uid="uid://dmpl3kj00caio" path="res://src/ui/switch_button.gd" id="6_44pk5"]
+[ext_resource type="PackedScene" uid="uid://cqsntrp3afljc" path="res://scenes/gameplay/zoo/zoo.tscn" id="6_jvmw0"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ebys2"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 50.0
+angle_min = -186.99998
+angle_max = 60.80001
+spread = 174.6
+flatness = 1.0
+initial_velocity_min = 311.69
+initial_velocity_max = 662.33997
+gravity = Vector3(0, 98, 0)
+scale_min = 10.0
+scale_max = 20.0
+color = Color(0.99998623, 0.3469449, 0.27687955, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jvmw0"]
 shader = ExtResource("5_ebys2")
@@ -30,11 +47,10 @@ shader_parameter/clip_warp = false
 shader_parameter/vignette_intensity = 0.26
 shader_parameter/vignette_opacity = 0.53200002527
 
-[node name="main" type="Node2D"]
+[node name="main" type="Node2D" node_paths=PackedStringArray("plinko", "zoo")]
 script = ExtResource("1_2dmjg")
-
-[node name="PenTool" type="Node2D" parent="."]
-script = ExtResource("2_b6u03")
+plinko = NodePath("Plinko")
+zoo = NodePath("Zoo")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -43,9 +59,39 @@ position = Vector2(-722, -195)
 
 [node name="Plinko" parent="." instance=ExtResource("4_b6u03")]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Zoo" parent="." instance=ExtResource("6_jvmw0")]
+visible = false
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="PenTool" type="Node2D" parent="."]
+script = ExtResource("2_b6u03")
+
+[node name="Particles" type="GPUParticles2D" parent="PenTool"]
+emitting = false
+amount = 24
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_ebys2")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Button" type="Button" parent="UI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -210.0
+offset_top = 81.0
+offset_right = -101.0
+offset_bottom = 134.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 32
+text = "Switch
+"
+script = ExtResource("6_44pk5")
+
+[node name="CRT" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CRT"]
 material = SubResource("ShaderMaterial_jvmw0")
 anchors_preset = 15
 anchor_right = 1.0

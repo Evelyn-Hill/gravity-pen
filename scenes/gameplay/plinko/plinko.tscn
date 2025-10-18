@@ -4,35 +4,37 @@
 [ext_resource type="PackedScene" uid="uid://bdj5j41q1dpht" path="res://scenes/gameplay/plinko/plinko_goal.tscn" id="2_3v5wk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y80ct"]
-size = Vector2(20, 646)
+size = Vector2(20, 1084)
 
 [node name="Plinko" type="Node2D"]
 script = ExtResource("1_y80ct")
 
 [node name="EdgeLeft" type="StaticBody2D" parent="."]
-position = Vector2(-605, 0)
+position = Vector2(-1000, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EdgeLeft"]
 shape = SubResource("RectangleShape2D_y80ct")
 
 [node name="EdgeLeft2" type="StaticBody2D" parent="."]
-position = Vector2(605, 0)
+position = Vector2(1000, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EdgeLeft2"]
 shape = SubResource("RectangleShape2D_y80ct")
 
 [node name="PlinkoGoal2" parent="." instance=ExtResource("2_3v5wk")]
-position = Vector2(-443, 329)
+position = Vector2(-699, 545)
 reward = 1
 
 [node name="PlinkoGoal7" parent="." instance=ExtResource("2_3v5wk")]
-position = Vector2(-64, 330)
+position = Vector2(-70, 536)
 reward = 3
 
 [node name="PlinkoGoal9" parent="." instance=ExtResource("2_3v5wk")]
-position = Vector2(67, 328)
+position = Vector2(85, 536)
 reward = 3
 
 [node name="PlinkoGoal5" parent="." instance=ExtResource("2_3v5wk")]
-position = Vector2(458, 326)
+position = Vector2(706, 540)
 reward = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]

@@ -1,0 +1,122 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqsntrp3afljc"]
+
+[ext_resource type="Texture2D" uid="uid://bpnau5b4sd33d" path="res://assets/gameplay/zoo/zooBG.bmp" id="1_huu4n"]
+[ext_resource type="PackedScene" uid="uid://cohsadqh0vfur" path="res://scenes/gameplay/zoo/Enclosure.tscn" id="2_q8qts"]
+
+[sub_resource type="Curve2D" id="Curve2D_huu4n"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 867, 460, 0, 0, 0, 0, 544, 310, 0, 0, 0, 0, 551, 59, 0, 0, 0, 0, 342, -51, 0, 0, 0, 0, 112, 56, 0, 0, 0, 0, -99, -47, 0, 0, 0, 0, -334, 50, 0, 0, 0, 0, -338, 298, 0, 0, 0, 0, -552, 437, 0, 0, 0, 0, -767, 306, 0, 0, 0, 0, -765, 49, 0, 0, 0, 0, -542, -71, 0, 0, 0, 0, -555, -313, 0, 0, 0, 0, -775, -431, 0, 0, 0, 0, -885, -459)
+}
+point_count = 15
+
+[node name="Zoo" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_huu4n")
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_huu4n")
+
+[node name="Enclosures" type="Node2D" parent="."]
+
+[node name="Enclosure1" parent="Enclosures" instance=ExtResource("2_q8qts")]
+position = Vector2(-111, 186)
+
+[node name="Jungle" parent="Enclosures/Enclosure1" index="1"]
+visible = false
+
+[node name="Mountain" parent="Enclosures/Enclosure1" index="2"]
+visible = false
+
+[node name="Enclosure2" parent="Enclosures" instance=ExtResource("2_q8qts")]
+position = Vector2(327, 186)
+
+[node name="Desert" parent="Enclosures/Enclosure2" index="0"]
+visible = false
+
+[node name="Jungle" parent="Enclosures/Enclosure2" index="1"]
+visible = false
+
+[node name="Mountain" parent="Enclosures/Enclosure2" index="2"]
+visible = false
+
+[node name="Enclosure3" parent="Enclosures" instance=ExtResource("2_q8qts")]
+position = Vector2(765.155, 186)
+
+[node name="Desert" parent="Enclosures/Enclosure3" index="0"]
+visible = false
+
+[node name="Jungle" parent="Enclosures/Enclosure3" index="1"]
+visible = false
+
+[node name="Mountain" parent="Enclosures/Enclosure3" index="2"]
+visible = false
+
+[node name="Enclosure4" parent="Enclosures" instance=ExtResource("2_q8qts")]
+position = Vector2(-550.335, 186)
+
+[node name="Desert" parent="Enclosures/Enclosure4" index="0"]
+visible = false
+
+[node name="Jungle" parent="Enclosures/Enclosure4" index="1"]
+visible = false
+
+[node name="Mountain" parent="Enclosures/Enclosure4" index="2"]
+visible = false
+
+[node name="Enclosure5" parent="Enclosures" instance=ExtResource("2_q8qts")]
+position = Vector2(-328, -183)
+
+[node name="Desert" parent="Enclosures/Enclosure5" index="0"]
+visible = false
+
+[node name="Jungle" parent="Enclosures/Enclosure5" index="1"]
+visible = false
+
+[node name="Mountain" parent="Enclosures/Enclosure5" index="2"]
+visible = false
+
+[node name="Enclosure6" parent="Enclosures" instance=ExtResource("2_q8qts")]
+position = Vector2(108, -182)
+
+[node name="Desert" parent="Enclosures/Enclosure6" index="0"]
+visible = false
+
+[node name="Jungle" parent="Enclosures/Enclosure6" index="1"]
+visible = false
+
+[node name="Mountain" parent="Enclosures/Enclosure6" index="2"]
+visible = false
+
+[node name="Enclosure7" parent="Enclosures" instance=ExtResource("2_q8qts")]
+position = Vector2(546.025, -182)
+
+[node name="Desert" parent="Enclosures/Enclosure7" index="0"]
+visible = false
+
+[node name="Jungle" parent="Enclosures/Enclosure7" index="1"]
+visible = false
+
+[node name="Mountain" parent="Enclosures/Enclosure7" index="2"]
+visible = false
+
+[node name="Enclosure8" parent="Enclosures" instance=ExtResource("2_q8qts")]
+position = Vector2(-767.85, -182)
+
+[node name="Desert" parent="Enclosures/Enclosure8" index="0"]
+visible = false
+
+[node name="Jungle" parent="Enclosures/Enclosure8" index="1"]
+visible = false
+
+[node name="Mountain" parent="Enclosures/Enclosure8" index="2"]
+visible = false
+
+[editable path="Enclosures/Enclosure1"]
+[editable path="Enclosures/Enclosure2"]
+[editable path="Enclosures/Enclosure3"]
+[editable path="Enclosures/Enclosure4"]
+[editable path="Enclosures/Enclosure5"]
+[editable path="Enclosures/Enclosure6"]
+[editable path="Enclosures/Enclosure7"]
+[editable path="Enclosures/Enclosure8"]

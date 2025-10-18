@@ -15,6 +15,8 @@ var circle_color : Color = Color(1, 1, 1, 0.2)
 var arc_inside_color: Color = Color(1, 0, 0, 1)
 var inside_radius : float = 0
 
+@onready var particles = get_node("Particles")
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		start_position = event.position - (get_viewport_rect().size * 0.5)
@@ -45,6 +47,10 @@ func _process(delta: float) -> void:
 				if result is Alien:
 					result.release_rigidbody()
 			selection_frames.clear()
+	
+	if particles != null:
+		particles.position = start_position
+
 	queue_redraw()
 
 func evaluate_selection_frames() -> Dictionary[Node, int]:
@@ -77,7 +83,11 @@ func animate_cirlce() -> void:
 	animate_arc(select_time)
 	var tween : Tween = get_tree().create_tween().parallel()
 	tween.tween_property(self, "circle_color", Color(1, 0, 0, 0.2), select_time)	
-	tween.finished.connect(func(): circle_color = Color(1, 1, 1, 0.2), CONNECT_ONE_SHOT)
+	tween.finished.connect(func(): 
+		circle_color = Color(1, 1, 1, 0.2)
+		particles.emitting = true
+		, 
+		CONNECT_ONE_SHOT)
 
 	pass
 
