@@ -18,12 +18,11 @@ const MAX_THINK_TIME : float = 7.0
 var think_points : Array[float]
 
 func _ready() -> void:
-	#var think_question : float = randf_range(0, 100)
-	#if think_question < 100:
+	var think_question : float = randf_range(0, 100)
+	if think_question < 75:
+		generate_think_points()
 
-	generate_think_points()
-
-func _process(delta: float) -> void:
+func Tick(delta: float) -> void:
 	if my_progress_state == ProgressState.PROGRESSING:
 		for think_point in think_points:
 			if is_equal_approx(progress_ratio / 100, think_point / 100):

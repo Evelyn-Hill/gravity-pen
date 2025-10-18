@@ -53,7 +53,7 @@ func select_enclosure(type: EnclosureType) -> void:
 func get_enclosure_score() -> int:
 	return ENCLOSURE_SCORE[selected_enclosure]
 
-func _input(event: InputEvent) -> void:
+func UpdateInput(event: InputEvent) -> void:
 	if event.is_action_pressed("click") and mouse_inside:
 		%BuyMenu.visible = !%BuyMenu.visible
 		for n in get_parent().get_children():

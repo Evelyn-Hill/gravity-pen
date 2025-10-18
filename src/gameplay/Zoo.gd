@@ -5,6 +5,8 @@ var paths : Array[Path2D]
 
 var enclosures : Array[Enclosure]
 
+var patrons : Array[Patron]
+
 const PATRON_SCENE : PackedScene = preload("res://scenes/gameplay/zoo/Patron.tscn")
 
 func _ready() -> void:
@@ -15,16 +17,16 @@ func _ready() -> void:
 		enclosures.append(enclosure)
 
 	var patron : Patron = PATRON_SCENE.instantiate()
+	patrons.append(patron)
 	paths.pick_random().add_child(patron)
 
-
 func UpdateInput(event : InputEvent) -> void:
-	pass
+	for enclosure in enclosures:
+		enclosure.UpdateInput(event)
 
 func Tick(delta : float) -> void:
-	pass
+	for patron : Patron in patrons:
+		patron.Tick(delta)
 
-func UpdateDraw() -> void:
-	pass
 
 
