@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://nkbmpwpbnoft"]
+[gd_scene load_steps=11 format=3 uid="uid://nkbmpwpbnoft"]
 
 [ext_resource type="Script" uid="uid://cjpwbnc1uo2lh" path="res://src/gameplay/PlinkoBoard.gd" id="1_y80ct"]
 [ext_resource type="PackedScene" uid="uid://bdj5j41q1dpht" path="res://scenes/gameplay/plinko/plinko_goal.tscn" id="2_3v5wk"]
@@ -7,9 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://bbe0a8m6wp37u" path="res://scenes/gameplay/pen_tool.tscn" id="3_ii6o4"]
 [ext_resource type="Texture2D" uid="uid://xybiv18vfj6s" path="res://assets/gameplay/spaceBG.streaks.png" id="4_bhtri"]
 [ext_resource type="Texture2D" uid="uid://cvvhp8n48ncum" path="res://assets/gameplay/spaceBG.planets.png" id="5_gd5cq"]
+[ext_resource type="Script" uid="uid://vfaooeal0q0k" path="res://src/gameplay/CollectionArea.gd" id="8_6kuqd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y80ct"]
 size = Vector2(20, 1084)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ymppl"]
+size = Vector2(2196, 20)
 
 [node name="Plinko" type="Node2D"]
 script = ExtResource("1_y80ct")
@@ -61,3 +65,18 @@ position = Vector2(706, 540)
 reward = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="AlienSpawn1" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-1230, -270)
+
+[node name="AlienSpawn2" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1245, -293)
+
+[node name="CollectionArea" type="Area2D" parent="."]
+position = Vector2(0, 631)
+script = ExtResource("8_6kuqd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectionArea"]
+shape = SubResource("RectangleShape2D_ymppl")

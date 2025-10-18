@@ -29,7 +29,6 @@ func Tick(delta : float) -> void:
 			(parralax_amount_pixels[count] * mouse_normalized_device_coords.x),	
 			(parralax_amount_pixels[count] * mouse_normalized_device_coords.y)	
 		)
-		print(new_position)
 		layer.position = layer.position.lerp(new_position, parralax_speed[count] * delta)
 		count += 1
 

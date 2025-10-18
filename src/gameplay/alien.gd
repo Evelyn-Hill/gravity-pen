@@ -52,3 +52,7 @@ func release_rigidbody() -> void:
 	apply_central_impulse(random_vector * impulse_muliplier)
 	gravity_scale = 1.0
 	released = true
+
+func destroy() -> void:
+	PlinkoBoard.i.remove_alien(self)
+	self.queue_free()		

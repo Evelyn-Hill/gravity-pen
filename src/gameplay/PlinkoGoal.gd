@@ -17,5 +17,3 @@ func _on_body_entered(body : Node2D) -> void:
 
 		registered_bodies.append(body)
 		print("+ ", reward) 
-		await get_tree().create_timer(1.0).timeout
-		body.queue_free()	

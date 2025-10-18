@@ -1,6 +1,8 @@
 class_name PlinkoBoard
 extends Node2D
 
+static var i 
+
 const PLINKO_PIECE := preload("res://scenes/gameplay/plinko/plinko_peg.tscn")
 const PLINKO_PIECE_SIZE : Vector2 = Vector2(64, 64)
 const ALIEN_SCENE := preload("res://scenes/gameplay/aliens/alien.tscn")
@@ -17,13 +19,18 @@ const peg_colors : Array[Color] = [
 @onready var pen_tool : PenTool = %PenTool
 @onready var bacground : MouseParralax = %Background
 
+@onready var alien_spawn_1 : Node2D = %AlienSpawn1
+
 var aliens : Array[Alien] 
+
+func _enter_tree() -> void:
+	i = self
 
 func _ready() -> void:
 	generate_board()
 	var alien : Alien = ALIEN_SCENE.instantiate()
 	aliens.append(alien)
-	add_child(alien)
+	alien_spawn_1.add_child(alien)
 
 
 func generate_board() -> void:
@@ -50,7 +57,13 @@ func generate_board() -> void:
 			add_child(piece)	
 
 	#queue_redraw()
-	
+
+func remove_alien(alien : Alien) -> void:
+	if !aliens.has(alien):
+		return
+		
+	aliens.remove_at(aliens.find(alien))
+
 func UpdateInput(event : InputEvent) -> void:
 	pen_tool.UpdateInput(event)
 	bacground.UpdateInput(event)

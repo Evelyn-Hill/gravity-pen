@@ -10,6 +10,8 @@ enum EnclosureType {
 
 const ENCLOSURE_SCORE : Array[int] = [ 0, 1, 3, 5 ]
 
+const MAX_ALIENS : Array[int] = [ 0, 15, 35, 50 ]
+
 @export var enclosure_nodes : Array[Node2D] 
 
 var selected_enclosure : EnclosureType = EnclosureType.NONE
@@ -43,6 +45,7 @@ func handle_purchase_request(button : TextureButton) -> void:
 				select_enclosure(enclosure_index)
 				Main.game_state.add_enclosure(selected_enclosure)
 				Main.game_state.add_coins(-(ENCLOSURE_SCORE[enclosure_index] * base_enclosure_cost))
+				SignalBus.emit_enclosure_purchased()
 				%BuyMenu.hide()
 
 
