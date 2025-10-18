@@ -4,7 +4,7 @@
 // Incrementing CACHE_VERSION will kick off the install event and force
 // previously cached resources to be updated from the network.
 /** @type {string} */
-const CACHE_VERSION = '1760782821|4475161';
+const CACHE_VERSION = '1760826939|4523155';
 /** @type {string} */
 const CACHE_PREFIX = 'GravityPen-sw-cache-';
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;
