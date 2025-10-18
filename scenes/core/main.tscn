@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dpio6p7g4fwp3"]
+[gd_scene load_steps=11 format=3 uid="uid://dpio6p7g4fwp3"]
 
 [ext_resource type="Script" uid="uid://bpq4s08bnspwu" path="res://src/core/main.gd" id="1_2dmjg"]
 [ext_resource type="Script" uid="uid://bknco5ltjlr61" path="res://src/gameplay/PenTool.gd" id="2_b6u03"]
@@ -7,6 +7,7 @@
 [ext_resource type="Shader" uid="uid://c3uds5hq2y078" path="res://src/shaders/CRT.gdshader" id="5_ebys2"]
 [ext_resource type="Script" uid="uid://dmpl3kj00caio" path="res://src/ui/switch_button.gd" id="6_44pk5"]
 [ext_resource type="PackedScene" uid="uid://cqsntrp3afljc" path="res://scenes/gameplay/zoo/zoo.tscn" id="6_jvmw0"]
+[ext_resource type="Script" uid="uid://dde28ryty7kql" path="res://src/ui/coin_coint.gd" id="7_phv0v"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ebys2"]
 particle_flag_disable_z = true
@@ -26,15 +27,15 @@ color = Color(0.99998623, 0.3469449, 0.27687955, 1)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jvmw0"]
 shader = ExtResource("5_ebys2")
 shader_parameter/overlay = false
-shader_parameter/scanlines_opacity = 0.02000000095
+shader_parameter/scanlines_opacity = 0.10000000475
 shader_parameter/scanlines_width = 0.0
-shader_parameter/grille_opacity = 0.010000000475
-shader_parameter/resolution = Vector2(640, 480)
-shader_parameter/pixelate = true
+shader_parameter/grille_opacity = 0.050000002375
+shader_parameter/resolution = Vector2(1920, 1080)
+shader_parameter/pixelate = false
 shader_parameter/roll = true
 shader_parameter/roll_speed = 2.0
 shader_parameter/roll_size = 0.010000000475
-shader_parameter/roll_variation = 1.2620000566851202
+shader_parameter/roll_variation = 0.10000000149012
 shader_parameter/distort_intensity = 0.02000000095
 shader_parameter/noise_opacity = 0.0
 shader_parameter/noise_speed = 5.0
@@ -88,6 +89,17 @@ theme_override_font_sizes/font_size = 32
 text = "Switch
 "
 script = ExtResource("6_44pk5")
+
+[node name="Label" type="Label" parent="UI"]
+offset_left = 88.0
+offset_top = 72.0
+offset_right = 305.0
+offset_bottom = 151.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 58
+text = "Coins: "
+script = ExtResource("7_phv0v")
 
 [node name="CRT" type="CanvasLayer" parent="."]
 

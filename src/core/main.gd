@@ -8,7 +8,9 @@ enum GameView {
 	PAUSE,		
 }
 
-var my_game_view : GameView = GameView.PLINKO
+static var my_game_view : GameView = GameView.PLINKO
+
+static var game_state : GameState = GameState.new()
 
 @export var plinko : PlinkoBoard
 @export var zoo : Node2D
@@ -16,6 +18,8 @@ var my_game_view : GameView = GameView.PLINKO
 func _ready() -> void:
 	print("Hello, Gravity Pen")
 	SignalBus.swap_view.connect(swap_view)
+
+
 
 func _process(delta: float) -> void:
 	match my_game_view:

@@ -1,22 +1,113 @@
-[gd_scene load_steps=5 format=3 uid="uid://cohsadqh0vfur"]
+[gd_scene load_steps=6 format=3 uid="uid://cohsadqh0vfur"]
 
 [ext_resource type="Script" uid="uid://bnx3tbqlox57u" path="res://src/gameplay/Enclosure.gd" id="1_e6rkq"]
 [ext_resource type="Texture2D" uid="uid://bsw6eb6meb2fk" path="res://assets/gameplay/zoo/enclosure1.bmp" id="1_tg3k8"]
 [ext_resource type="Texture2D" uid="uid://cdodb871m03xt" path="res://assets/gameplay/zoo/enclosure2.bmp" id="2_e6rkq"]
 [ext_resource type="Texture2D" uid="uid://bw0xc7gyoisby" path="res://assets/gameplay/zoo/enclosure3.bmp" id="3_6evfv"]
 
-[node name="Enclosure" type="Node2D" node_paths=PackedStringArray("enclosure_nodes")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e6rkq"]
+size = Vector2(322, 348)
+
+[node name="Enclosure" type="Node2D" node_paths=PackedStringArray("enclosure_nodes", "purchase_buttons")]
 script = ExtResource("1_e6rkq")
 enclosure_nodes = [NodePath("NONE"), NodePath("Desert"), NodePath("Jungle"), NodePath("Mountain")]
-selected_enclosure = 1
+purchase_buttons = [NodePath("BuyMenu/VBoxContainer/HBoxContainer/VBoxContainer/DesertButton"), NodePath("BuyMenu/VBoxContainer/HBoxContainer/VBoxContainer2/JungleButton"), NodePath("BuyMenu/VBoxContainer/HBoxContainer/VBoxContainer3/MountainButton")]
+
+[node name="BuyMenu" type="Control" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = -133.0
+offset_top = -291.0
+offset_right = -93.0
+offset_bottom = -251.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BuyMenu"]
+layout_mode = 0
+offset_left = -5.0
+offset_right = 908.0
+offset_bottom = 393.0
+scale = Vector2(0.3, 0.3)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BuyMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BuyMenu/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="DesertButton" type="TextureButton" parent="BuyMenu/VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture_normal = ExtResource("1_tg3k8")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="BuyMenu/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 48
+text = "50 Coins"
+horizontal_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="BuyMenu/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="JungleButton" type="TextureButton" parent="BuyMenu/VBoxContainer/HBoxContainer/VBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture_normal = ExtResource("2_e6rkq")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="BuyMenu/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 48
+text = "50 Coins"
+horizontal_alignment = 1
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="BuyMenu/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="MountainButton" type="TextureButton" parent="BuyMenu/VBoxContainer/HBoxContainer/VBoxContainer3"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture_normal = ExtResource("3_6evfv")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="BuyMenu/VBoxContainer/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/font_size = 48
+text = "50 Coins"
+horizontal_alignment = 1
+
+[node name="ClickArea" type="Area2D" parent="."]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea"]
+shape = SubResource("RectangleShape2D_e6rkq")
 
 [node name="Desert" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("1_tg3k8")
 
 [node name="Jungle" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("2_e6rkq")
 
 [node name="Mountain" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("3_6evfv")
 
 [node name="NONE" type="Sprite2D" parent="."]

@@ -15,13 +15,19 @@ var circle_color : Color = Color(1, 1, 1, 0.2)
 var arc_inside_color: Color = Color(1, 0, 0, 1)
 var inside_radius : float = 0
 
+var attack_enabled : bool = true
+
 @onready var particles = get_node("Particles")
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		start_position = event.position - (get_viewport_rect().size * 0.5)
+		if start_position.x > 730 and start_position.y < -400:
+			attack_enabled = false
+		else:
+			attack_enabled = true
 
-	if event.is_action_pressed("click") and is_selecting == false:
+	if event.is_action_pressed("click") and is_selecting == false and attack_enabled:
 		animate_cirlce()
 		is_selecting = true
 
@@ -36,6 +42,10 @@ func find_objects_in_circle() -> Array[Node]:
 	return result
 
 func _process(delta: float) -> void:
+	if Main.my_game_view != Main.GameView.PLINKO:
+		attack_enabled = false
+		is_selecting = false
+
 	if is_selecting:
 		select_timer += delta
 		selection_frames.append(find_objects_in_circle())
@@ -103,8 +113,12 @@ func animate_arc(time : float) -> void:
 		animate_arc(new_time), CONNECT_ONE_SHOT)
 
 func _draw() -> void:
+	if !attack_enabled:
+		return
+
 	var center = start_position
-		# Optional: Draw a translucent, filled circle
+	# Optional: Draw a translucent, filled circle
+	
 	draw_circle(center, radius, circle_color)
 	draw_arc(center, inside_radius, 0, PI * 2, 64, arc_inside_color, 2.0)
 
