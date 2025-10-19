@@ -66,6 +66,8 @@ func get_enclosure_score() -> int:
 func BackgroundTick(delta : float) -> void:
 	if selected_enclosure != EnclosureType.NONE:
 		cleanliness -= delta * CLEANLINESS_SPEED
+		var stinky_opacity : float = 1 - (cleanliness / MAX_CLEANLINESS)
+		%STINKY.modulate = Color(1, 1, 1, stinky_opacity)		
 		%CleanlinessSlider.value = cleanliness
 
 func clean_enclosure() -> void:

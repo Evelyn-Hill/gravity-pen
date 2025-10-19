@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cohsadqh0vfur"]
+[gd_scene load_steps=7 format=3 uid="uid://cohsadqh0vfur"]
 
 [ext_resource type="Script" uid="uid://bnx3tbqlox57u" path="res://src/gameplay/Enclosure.gd" id="1_e6rkq"]
 [ext_resource type="Texture2D" uid="uid://bsw6eb6meb2fk" path="res://assets/gameplay/zoo/enclosure1.bmp" id="1_tg3k8"]
 [ext_resource type="Texture2D" uid="uid://cdodb871m03xt" path="res://assets/gameplay/zoo/enclosure2.bmp" id="2_e6rkq"]
 [ext_resource type="Texture2D" uid="uid://bw0xc7gyoisby" path="res://assets/gameplay/zoo/enclosure3.bmp" id="3_6evfv"]
+[ext_resource type="Texture2D" uid="uid://bmrq70rcdvhhb" path="res://assets/gameplay/stinkyOVERLAY1.png" id="5_6evfv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e6rkq"]
 size = Vector2(322, 348)
@@ -133,3 +134,8 @@ visible = false
 texture = ExtResource("3_6evfv")
 
 [node name="NONE" type="Sprite2D" parent="."]
+
+[node name="STINKY" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("5_6evfv")
