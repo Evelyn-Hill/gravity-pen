@@ -1,57 +1,115 @@
-[gd_scene load_steps=6 format=3 uid="uid://bdj5j41q1dpht"]
+[gd_scene load_steps=8 format=3 uid="uid://bdj5j41q1dpht"]
 
 [ext_resource type="Script" uid="uid://b5jj0krj5xytv" path="res://src/gameplay/PlinkoGoal.gd" id="1_mm46k"]
+[ext_resource type="Theme" uid="uid://c7umojkpyyytt" path="res://assets/GameTheme.tres" id="2_fllsm"]
+[ext_resource type="Texture2D" uid="uid://pum21d22bi48" path="res://assets/gameplay/plinkobin.png" id="2_xj6mb"]
+[ext_resource type="Texture2D" uid="uid://b5hwtkrdrdw3g" path="res://assets/ui/coin_01.png" id="3_p2u8s"]
+[ext_resource type="Texture2D" uid="uid://c06vixuvdvyiu" path="res://assets/ui/crab_meat.png" id="4_p2u8s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_thl4o"]
 size = Vector2(56, 32)
 
-[sub_resource type="Gradient" id="Gradient_thl4o"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ddm5q"]
+size = Vector2(20, 12)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_mm46k"]
-gradient = SubResource("Gradient_thl4o")
-width = 4
-fill = 1
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xj6mb"]
-size = Vector2(4, 64)
-
-[node name="PlinkoGoal" type="StaticBody2D"]
+[node name="PlinkoGoal" type="StaticBody2D" node_paths=PackedStringArray("reward_nodes")]
 script = ExtResource("1_mm46k")
+reward_nodes = [NodePath("RewardNodes/ten_gold"), NodePath("RewardNodes/ten_food"), NodePath("RewardNodes/twenty_gold"), NodePath("RewardNodes/twenty_food2")]
 
-[node name="RewardLabel" type="Label" parent="."]
-unique_name_in_owner = true
-offset_left = -19.0
-offset_top = -30.0
-offset_right = 21.0
-offset_bottom = -7.0
-text = "+1"
-horizontal_alignment = 1
+[node name="RewardNodes" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = ExtResource("2_fllsm")
+
+[node name="ten_gold" type="HBoxContainer" parent="RewardNodes"]
+visible = false
+layout_mode = 0
+offset_left = -25.0
+offset_top = -45.0
+offset_right = 53.0
+offset_bottom = 3.0
+scale = Vector2(0.6, 0.6)
+
+[node name="TextureRect" type="TextureRect" parent="RewardNodes/ten_gold"]
+layout_mode = 2
+texture = ExtResource("3_p2u8s")
+
+[node name="Label" type="Label" parent="RewardNodes/ten_gold"]
+layout_mode = 2
+text = "10"
+
+[node name="ten_food" type="HBoxContainer" parent="RewardNodes"]
+visible = false
+layout_mode = 0
+offset_left = -23.0
+offset_top = -44.0
+offset_right = 55.0
+offset_bottom = 4.0
+scale = Vector2(0.6, 0.6)
+
+[node name="TextureRect" type="TextureRect" parent="RewardNodes/ten_food"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_p2u8s")
+
+[node name="Label" type="Label" parent="RewardNodes/ten_food"]
+layout_mode = 2
+text = "10"
+
+[node name="twenty_gold" type="HBoxContainer" parent="RewardNodes"]
+visible = false
+layout_mode = 0
+offset_left = -25.0
+offset_top = -45.0
+offset_right = 53.0
+offset_bottom = 3.0
+scale = Vector2(0.6, 0.6)
+
+[node name="TextureRect" type="TextureRect" parent="RewardNodes/twenty_gold"]
+layout_mode = 2
+texture = ExtResource("3_p2u8s")
+
+[node name="Label" type="Label" parent="RewardNodes/twenty_gold"]
+layout_mode = 2
+text = "20"
+
+[node name="twenty_food2" type="HBoxContainer" parent="RewardNodes"]
+visible = false
+layout_mode = 0
+offset_left = -23.0
+offset_top = -44.0
+offset_right = 55.0
+offset_bottom = 4.0
+scale = Vector2(0.6, 0.6)
+
+[node name="TextureRect" type="TextureRect" parent="RewardNodes/twenty_food2"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_p2u8s")
+
+[node name="Label" type="Label" parent="RewardNodes/twenty_food2"]
+layout_mode = 2
+text = "20"
 
 [node name="DetectionArea" type="Area2D" parent="."]
 unique_name_in_owner = true
+position = Vector2(0, -10)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
-position = Vector2(0, 13)
+position = Vector2(-1, 15)
 shape = SubResource("RectangleShape2D_thl4o")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-30, 1)
-texture = SubResource("GradientTexture2D_mm46k")
-
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(0, 31)
-rotation = 1.5707964
-texture = SubResource("GradientTexture2D_mm46k")
-
-[node name="Sprite2D3" type="Sprite2D" parent="."]
-position = Vector2(30, 1)
-texture = SubResource("GradientTexture2D_mm46k")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-30, 1)
-shape = SubResource("RectangleShape2D_xj6mb")
+texture = ExtResource("2_xj6mb")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
-position = Vector2(30, 1)
-shape = SubResource("RectangleShape2D_xj6mb")
+position = Vector2(-33, -7)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_ddm5q")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="."]
+position = Vector2(34, -7)
+rotation = 1.5707964
+shape = SubResource("RectangleShape2D_ddm5q")

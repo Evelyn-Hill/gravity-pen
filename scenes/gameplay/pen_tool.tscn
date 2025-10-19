@@ -1,6 +1,39 @@
-[gd_scene load_steps=2 format=3 uid="uid://bbe0a8m6wp37u"]
+[gd_scene load_steps=6 format=3 uid="uid://bbe0a8m6wp37u"]
 
 [ext_resource type="Script" uid="uid://bknco5ltjlr61" path="res://src/gameplay/PenTool.gd" id="1_xihsi"]
+[ext_resource type="AudioStream" uid="uid://d1ec37dsd7dya" path="res://assets/audio/sfx/PC_Jim_laser_start_real.ogg" id="2_e0txg"]
+[ext_resource type="AudioStream" uid="uid://kujjfl3486xv" path="res://assets/audio/sfx/PC_Jim_laser_hold48.ogg" id="2_qv8x5"]
+[ext_resource type="AudioStream" uid="uid://bsove3hafb8ax" path="res://assets/audio/sfx/PC_Jim_laser_bigboom48.ogg" id="3_xihsi"]
+[ext_resource type="AudioStream" uid="uid://cvla6lpupjyou" path="res://assets/audio/sfx/PC_Jim_laser_start48.ogg" id="4_pus6f"]
 
 [node name="PenTool" type="Node2D"]
 script = ExtResource("1_xihsi")
+reverse_audio_stream = ExtResource("2_e0txg")
+
+[node name="hold" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_qv8x5")
+panning_strength = 0.0
+bus = &"SFX"
+
+[node name="fire" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_xihsi")
+volume_db = -5.0
+panning_strength = 0.0
+bus = &"SFX"
+
+[node name="cancel" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_pus6f")
+volume_db = -5.0
+panning_strength = 0.0
+bus = &"SFX"
+
+[node name="build" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("2_e0txg")
+panning_strength = 0.0
+bus = &"SFX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

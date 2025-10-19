@@ -39,3 +39,16 @@ func emit_food_purchased(food: int) -> void:
 signal aliens_ditributed()
 func emit_aliens_ditributed() -> void:
 	aliens_ditributed.emit()
+
+signal tut_alien_collected()
+func emit_tut_alien_collected() -> void:
+	tut_alien_collected.emit()
+
+signal swap_screen()
+func emit_swap_screen() -> void:
+	swap_screen.emit()
+
+signal dirty_first_enclosure()
+func emit_dirty_first_enclosure() -> void:
+	dirty_first_enclosure.emit()	
+

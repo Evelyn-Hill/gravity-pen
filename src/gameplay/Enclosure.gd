@@ -86,6 +86,7 @@ func select_enclosure(type: EnclosureType) -> void:
 	selected_enclosure = type	
 	%Capacity.max_value = MAX_ALIENS[type]
 	%Capacity.modulate = Color.WHITE
+	%Capacity.visible = true
 	purchase_buttons[selected_enclosure - 1].queue_free()
 	purchase_labels[selected_enclosure - 1].queue_free()
 	v_separator[selected_enclosure - 1].queue_free()
@@ -123,10 +124,10 @@ func UpdateInput(event: InputEvent) -> void:
 func set_buy_menu(state : bool) -> void:
 	%BuyMenu.visible = state
 	%Capacity.visible = !state
-	if selected_enclosure != EnclosureType.NONE and cleanliness < 50:
-		%CleanContainer.show()
+	if selected_enclosure != EnclosureType.NONE and cleanliness < 75:
+		%CleanContainer.visible = state
 	else:
-		%CleanContainer.hide()
+		%CleanContainer.visible = !state
 
 
 
@@ -150,7 +151,8 @@ func synchronize_alien_display() -> void:
 	var alien_count = Zoo.i.get_enclosure_alien_count(self)
 	var instanced_alien_count : Array[int] = count_instanced_aliens()
 
-	#%Capacity.value = alien_count
+	var alien_total = alien_count[0] + alien_count[1] + alien_count[2]
+	%Capacity.value = alien_total
 
 	for i in range(alien_count.size()):
 		if alien_count[i] > 0 and instanced_alien_count[i] == 0:

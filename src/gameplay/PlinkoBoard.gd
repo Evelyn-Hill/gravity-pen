@@ -8,15 +8,11 @@ const PLINKO_PIECE_SIZE : Vector2 = Vector2(64, 64)
 const ALIEN_SCENE := preload("res://scenes/gameplay/aliens/alien.tscn")
 
 var grid_positions : Array[Vector2]
+var pegs : Array[Node]
 
-const peg_colors : Array[Color] = [
-	Color.RED,
-	Color.GREEN,
-	Color.BLUE
-]
 
-const MIN_SPAWN_TIME : float = 1.5
-const MAX_SPAWN_TIME : float = 3.0
+const MIN_SPAWN_TIME : float = 3.0
+const MAX_SPAWN_TIME : float = 7.0
 
 
 @onready var pen_tool : PenTool = %PenTool
@@ -27,12 +23,37 @@ const MAX_SPAWN_TIME : float = 3.0
 
 var aliens : Array[Alien] 
 
+@export var goals : Array[Node2D]
+
 func _enter_tree() -> void:
 	i = self
 
-func _ready() -> void:
-	generate_board()
+func fade_in() -> void:
+	const TIME_BETWEEN : float = 0.01
+	const TIME_BETWEEN_GOALS : float = 0.35
+	pegs.reverse()
+	var x = 0
+	for peg in pegs:
+		peg.visible = true
+		if x % 2 == 0:
+			SFXPlayer.i.play(SFXPlayer.SFX.ELECTRIC_CLICK, peg.position)
+		await get_tree().create_timer(TIME_BETWEEN).timeout
+		x += 1
+
+	await get_tree().create_timer(TIME_BETWEEN_GOALS).timeout
+
+	var i := 11	
+	for goal in goals:
+		goal.visible = true
+		SFXPlayer.i.play(i, goal.position)
+		i += 1
+		await get_tree().create_timer(TIME_BETWEEN_GOALS).timeout
+
 	alien_spawn_timer()
+
+func Start() -> void:
+	generate_board()
+	fade_in()
 
 func alien_spawn_timer() -> void:
 	spawn_aliens()
@@ -95,7 +116,8 @@ func generate_board() -> void:
 		if i % 2 == 0:
 			var piece = PLINKO_PIECE.instantiate()
 			piece.position = grid_positions[i]
-			piece.modulate = peg_colors[i % peg_colors.size()]
+			pegs.append(piece)
+			piece.visible = false
 			add_child(piece)	
 
 	#queue_redraw()
@@ -113,6 +135,7 @@ func UpdateInput(event : InputEvent) -> void:
 func BackgroundTick(delta : float) -> void:
 	for alien : Alien in aliens:
 		alien.Tick(delta)
+	pen_tool.BackgroundTick(delta)
 
 func Tick(delta : float) -> void:
 	pen_tool.Tick(delta)

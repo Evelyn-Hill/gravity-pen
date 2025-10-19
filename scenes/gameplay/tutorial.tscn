@@ -1,0 +1,98 @@
+[gd_scene load_steps=6 format=3 uid="uid://bymcnvj0svuqy"]
+
+[ext_resource type="Script" uid="uid://on7ojaknpx43" path="res://src/ui/Tutorial.gd" id="1_ch5ii"]
+[ext_resource type="Theme" uid="uid://c7umojkpyyytt" path="res://assets/GameTheme.tres" id="1_r32yl"]
+[ext_resource type="Resource" uid="uid://d0mn8nbao5jrl" path="res://assets/TutorialScenes/Intro.tres" id="2_uw7rx"]
+[ext_resource type="Texture2D" uid="uid://dmauhvxc2rpxf" path="res://assets/TutorialScenes/ppAWK.png" id="3_1hvxb"]
+[ext_resource type="Texture2D" uid="uid://dyg3dt5ny2qwx" path="res://assets/TutorialScenes/tutorialarrow.png" id="5_ufs1c"]
+
+[node name="Tutorial" type="CanvasLayer"]
+layer = 50
+script = ExtResource("1_ch5ii")
+scene = ExtResource("2_uw7rx")
+
+[node name="Control" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_r32yl")
+
+[node name="TutorialContainer" type="HBoxContainer" parent="Control"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -941.0
+offset_top = -469.0
+offset_right = 117.0
+offset_bottom = -16.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/TutorialContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/TutorialContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/TutorialContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="Label" type="Label" parent="Control/TutorialContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Prof. Plum"
+
+[node name="HSeparator" type="HSeparator" parent="Control/TutorialContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/TutorialContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 5
+
+[node name="Text" type="RichTextLabel" parent="Control/TutorialContainer/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(600, 200)
+layout_mode = 2
+text = "This is a long string of rich text that fulls the screen."
+
+[node name="TalkSprite" type="TextureRect" parent="Control/TutorialContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("3_1hvxb")
+flip_h = true
+
+[node name="ZooHighlight" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(568, 965.00006)
+rotation = 0.7899172
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("5_ufs1c")
+
+[node name="BoxHighlight" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(257, 882.9999)
+rotation = 3.1554978
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("5_ufs1c")
+
+[node name="ShopHighlight" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(419.99994, 873)
+rotation = -2.1294913
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("5_ufs1c")

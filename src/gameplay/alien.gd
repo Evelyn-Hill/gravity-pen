@@ -34,8 +34,7 @@ var released : bool = false
 
 func _ready() -> void:
 	%Collider.disabled = true
-	pass
-	#%Timer.timeout.connect(func(): destroy())
+	%Timer.timeout.connect(func(): destroy())
 
 func Tick(delta: float) -> void:
 	if released:
@@ -50,6 +49,14 @@ func Tick(delta: float) -> void:
 	position += move_vector
 
 func release_rigidbody() -> void:
+	%Timer.stop()
+	%Timer2.start()
+	
+	%Timer2.timeout.connect(func(): 
+		Main.game_state.add_alien(my_alien_type)
+		destroy()
+	)
+
 	%Collider.disabled = false
 	const horizontal_force_max := 1
 	const horizontal_force_min := -1

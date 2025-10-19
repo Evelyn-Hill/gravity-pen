@@ -1,6 +1,8 @@
 class_name MouseParralax
 extends Node2D
 
+static var i 
+
 @onready var SCREEN_SIZE : Vector2 = get_viewport_rect().size
 var mouse_position : Vector2
 
@@ -9,6 +11,9 @@ var mouse_position : Vector2
 var parralax_layers : Array[Sprite2D]
 
 var mouse_normalized_device_coords : Vector2 
+
+func _enter_tree() -> void:
+	i = self
 
 func _ready() -> void:
 	for child in get_children():

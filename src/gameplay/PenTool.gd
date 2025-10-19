@@ -1,6 +1,12 @@
 class_name PenTool
 extends Node2D
 
+enum MouseState {
+	NONE,
+	CHARGING,
+	COOLDOWN
+}
+
 var is_selecting : bool = false
 var start_position: Vector2
 var radius : float = 50
@@ -10,27 +16,51 @@ var select_timer : float = 0.0
 
 var selection_frames : Array[Array]
 
-var circle_color : Color = Color(1, 1, 1, 0.2)
+var circle_color : Color = Color(1, 1, 1, 0.05)
+var circle_outline_color : Color = Color(0, 1, 0, 0.5)
 
 var arc_inside_color: Color = Color(1, 0, 0, 1)
 var inside_radius : float = 0
 
-var attack_enabled : bool = true
+var attack_enabled : bool = false
 
-@onready var particles = get_node("Particles")
+var circle_animation_progress : float = 0
+
+const HOLD_TIME : float = 2.5
+const COOLDOWN_TIME : float = 2.5
+
+var attack_time : float = HOLD_TIME
+var cooldown : float = COOLDOWN_TIME
+
+var my_mouse_state : MouseState = MouseState.NONE
+
+var focus_node : Node2D = null
+
+@export var reverse_audio_stream : AudioStream
+var rev_audio_duration : float
+
+enum PlinkoAnimEnum {
+	WAITING,
+	FIRST_BEAT,
+	SECOND_BEAT,
+	RESET,
+}
+
+var my_plinko_state : PlinkoAnimEnum = PlinkoAnimEnum.WAITING
+
+
+func _ready() -> void:
+	rev_audio_duration = reverse_audio_stream.get_length()
 
 func UpdateInput(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
-		start_position = event.position - (get_viewport_rect().size * 0.5)
+		start_position = ((event.position - get_viewport_rect().size / 2) / Main.camera.zoom) + Main.camera.position
 
 		if start_position.y < -400:
 			attack_enabled = false
 		else:
 			attack_enabled = true
 
-	if event.is_action_pressed("click") and is_selecting == false and attack_enabled:
-		animate_cirlce()
-		is_selecting = true
 
 func find_objects_in_circle() -> Array[Node]:
 	var result : Array[Node]
@@ -43,75 +73,92 @@ func find_objects_in_circle() -> Array[Node]:
 	return result
 
 func Tick(delta: float) -> void:
-	if Main.my_game_view != Main.GameView.PLINKO:
-		attack_enabled = false
-		is_selecting = false
+	if my_mouse_state == MouseState.COOLDOWN:
+		cooldown_timer(delta)
 
-	if is_selecting:
-		select_timer += delta
-		selection_frames.append(find_objects_in_circle())
-		if select_timer > select_time:	
-			is_selecting = false
-			select_timer = 0
-			var result = find_selected_node(evaluate_selection_frames())
-			if result != null:
-				if result is Alien:
-					result.release_rigidbody()
-			selection_frames.clear()
-	
-	if particles != null:
-		particles.position = start_position
+	animate_plinko(delta)										
 
+	if Input.is_action_pressed("click") and my_mouse_state != MouseState.COOLDOWN:
+		attack_time -= delta
+		selection_frames.append(find_objects_in_circle())	
+
+		animate_cirlce(delta)
+
+		if !%hold.playing:
+			%hold.play()
+
+		if attack_time <= rev_audio_duration:
+			if !%build.playing:
+				%build.play()			
+		
+		if attack_time <= HOLD_TIME / 1.5 and my_plinko_state == PlinkoAnimEnum.WAITING:
+			my_plinko_state = PlinkoAnimEnum.FIRST_BEAT
+		
+
+		if attack_time <= 0:
+			%fire.play()	
+			Main.i.shake_camera()	
+			%Particles.emitting = true
+			var frames : Dictionary[Node, int] = evaluate_selection_frames()
+			for node in frames:
+				if frames[node] > frames.size() / 2:
+					if node is Alien:
+						node.release_rigidbody()
+			reset_attack(true)
+	else:
+		if attack_time < 1.5:
+			reset_attack(true)
+			%cancel.play()
+			Main.i.cancel_camera()
+		reset_attack(false)		
+					
 	queue_redraw()
+
+func reset_attack(cooldown : bool) -> void:
+	%hold.stop()
+	%build.stop()
+	circle_animation_progress = 0
+	attack_time = HOLD_TIME
+	my_plinko_state = PlinkoAnimEnum.WAITING
+	%Particles.emitting = false
+	if selection_frames.size() > 0:
+		selection_frames.clear()
+	circle_color = Color(1, 1, 1, 0.05)
+	if cooldown:
+		my_mouse_state = MouseState.COOLDOWN
+
+		
+func BackgroundTick(delta : float) -> void:	
+	if Main.my_game_view == Main.GameView.ZOO:
+		stop_audio()
+
+func cooldown_timer(delta: float) -> void:
+	cooldown -= delta
+	
+	circle_outline_color = circle_outline_color.lerp(Color(0, 1, 0, 0.5), (1 - cooldown / COOLDOWN_TIME) * delta)			
+
+	if cooldown <= 0:
+		my_mouse_state = MouseState.NONE
+		cooldown = COOLDOWN_TIME
+		SFXPlayer.i.play(SFXPlayer.SFX.BEAM_READY)		
 
 func evaluate_selection_frames() -> Dictionary[Node, int]:
 	var result : Dictionary[Node, int] 
 
 	for item in selection_frames:
 		for node : Node2D in item:
+			if !node.is_inside_tree():
+				continue
 			result.get_or_add(node, 0)
 			result[node] += 1
 
 	return result
 
-func find_selected_node(data: Dictionary[Node, int]) -> Node:
 
-	var highest_count : int = 0
-	var best_node : Node = null
-
-	for item : Node in data:
-		if data[item] > highest_count:
-			highest_count = data[item]
-			best_node = item
-
-	if highest_count > selection_frames.size() / 2:	
-		return best_node
-	else:
-		return null
-
-
-func animate_cirlce() -> void:
-	animate_arc(select_time)
-	var tween : Tween = get_tree().create_tween().parallel()
-	tween.tween_property(self, "circle_color", Color(1, 0, 0, 0.2), select_time)	
-	tween.finished.connect(func(): 
-		circle_color = Color(1, 1, 1, 0.2)
-		particles.emitting = true
-		, 
-		CONNECT_ONE_SHOT)
-
-	pass
-
-func animate_arc(time : float) -> void:
-	if time < 0.001:
-		return
-
-	var new_time : float = time / 2
-	var tween2 : Tween = get_tree().create_tween()
-	tween2.tween_property(self, "inside_radius", radius, new_time)
-	tween2.finished.connect(func(): 
-		inside_radius = 0.0
-		animate_arc(new_time), CONNECT_ONE_SHOT)
+func animate_cirlce(delta : float) -> void:
+	circle_animation_progress += delta / HOLD_TIME
+	circle_color = lerp(circle_color, Color(1, 0, 0.1, circle_animation_progress), circle_animation_progress)
+	circle_outline_color = lerp(circle_outline_color, Color(1, 0, 0, 1), circle_animation_progress)
 
 func _draw() -> void:
 	if !attack_enabled:
@@ -124,7 +171,7 @@ func _draw() -> void:
 	draw_arc(center, inside_radius, 0, PI * 2, 64, arc_inside_color, 2.0)
 
 	# Draw a yellow outline
-	draw_arc(center, radius, 0, PI * 2, 64, Color.RED, 2.0)
+	draw_arc(center, radius, 0, PI * 2, 64, circle_outline_color, 4.0)
 		
 
 func cull_points(packed_array: PackedVector2Array) -> PackedVector2Array:
@@ -143,7 +190,25 @@ func cull_points(packed_array: PackedVector2Array) -> PackedVector2Array:
 
 	return result
 
+func update_child_positions() -> void:
+	for child in get_children():
+		child.position = position
 
+func stop_audio() -> void:
+	for child in get_children():
+		child.stop()
 
-func find_inside_node() -> void:
-	pass
+func animate_plinko(delta) -> void:
+	const PLINKO_SCALE_BEAT : Vector2 = Vector2(2, 2)
+
+	match my_plinko_state:
+		PlinkoAnimEnum.WAITING:
+			reset_plinko(delta)
+		PlinkoAnimEnum.FIRST_BEAT:			
+			Main.camera.position = Main.camera.position.lerp(start_position, 0.99 * delta * 1)
+			Main.camera.zoom = Main.camera.zoom.lerp(PLINKO_SCALE_BEAT, 0.99 * delta * 2)	
+
+	
+func reset_plinko(delta) -> void:
+	Main.camera.position = Main.camera.position.lerp(Vector2.ZERO, 1 * delta * 5)
+	Main.camera.zoom = Main.camera.zoom.lerp(Vector2(1, 1), 1 * delta * 5)	

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://s1iwe7dfds1l"
+path="res://.godot/imported/Freeze UI_move [2024-08-29 152022]48.ogg-916ce28af229a36df1db62d8bb010175.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/Freeze UI_move [2024-08-29 152022]48.ogg"
+dest_files=["res://.godot/imported/Freeze UI_move [2024-08-29 152022]48.ogg-916ce28af229a36df1db62d8bb010175.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

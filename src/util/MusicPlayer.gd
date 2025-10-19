@@ -14,7 +14,8 @@ enum Tracks {
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	bus = "Music"
-	play_track(Tracks.Gameplay)
+	play_track(Tracks.MainMenu)
+	panning_strength = 0
 
 func play_track(track : Tracks) -> void:
 	self.stop()

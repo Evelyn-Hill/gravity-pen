@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://7pwde308f6wf"
+path="res://.godot/imported/Pillow Place Sound48.ogg-894cc08de54cfce563c20a06448d4ae0.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/Pillow Place Sound48.ogg"
+dest_files=["res://.godot/imported/Pillow Place Sound48.ogg-894cc08de54cfce563c20a06448d4ae0.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

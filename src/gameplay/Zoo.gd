@@ -12,7 +12,7 @@ var patrons : Array[Patron]
 var homeless_aliens : Array[Alien.AlienType]
 var enclosure_aliens : Dictionary[Enclosure, Array]
 
-var food : int = 30
+var food : int = 15
 
 var unfed_aliens : int
 
@@ -60,7 +60,7 @@ func Tick(delta : float) -> void:
 	
 func BackgroundTick(delta : float) -> void:
 	if food <= 0:
-		Main.my_game_view = Main.GameView.MENU	
+		Main.my_game_view = Main.GameView.FAIL
 		return
 
 	for patron : Patron in patrons:
@@ -85,7 +85,7 @@ func calculate_zoo_score() -> int:
 		enclosure_score += enclosure.ENCLOSURE_SCORE[enclosure.selected_enclosure]
 
 		var cleanliness_score = floori((enclosure.MAX_CLEANLINESS - enclosure.cleanliness) / 2)
-		enclosure_score -= cleanliness_score
+		enclosure_score -= clampi(cleanliness_score, 1, enclosure_score)
 
 		for alien in enclosure_aliens[enclosure]:
 			enclosure_score += Alien.ALIEN_SCORES[alien]	
@@ -141,6 +141,7 @@ func alien_eat_timer(delta: float) -> void:
 func feed_aliens() -> void:
 	alien_eat_time = ALIEN_EAT_INTERVAL
 	food -= count_aliens()		
+	SFXPlayer.i.play(SFXPlayer.SFX.FOOD_CRUNCH)
 	SignalBus.emit_feeding_occured(food)
 
 func spawn_patron() -> void:

@@ -143,57 +143,6 @@ tracks/7/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_4bd7q"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ShopPanel:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("OpenButton:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("%ShopPanel:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("%OpenButton:disabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
 [sub_resource type="Animation" id="Animation_edxao"]
 resource_name = "FadeOut"
 length = 0.4
@@ -246,6 +195,57 @@ tracks/3/keys = {
 "values": [false]
 }
 
+[sub_resource type="Animation" id="Animation_4bd7q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ShopPanel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OpenButton:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%ShopPanel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%OpenButton:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_edxao"]
 _data = {
 &"Fade": SubResource("Animation_rbc0r"),
@@ -271,26 +271,72 @@ position = Vector2(327, 186)
 [node name="Enclosure3" parent="Enclosures" instance=ExtResource("2_q8qts")]
 position = Vector2(765.155, 186)
 
+[node name="PanelContainer" parent="Enclosures/Enclosure3/BuyMenu" index="0"]
+offset_left = -397.15503
+offset_top = -39.0
+offset_right = 1426.845
+offset_bottom = 549.0
+
 [node name="Enclosure4" parent="Enclosures" instance=ExtResource("2_q8qts")]
 position = Vector2(-550.335, 186)
 
 [node name="Enclosure5" parent="Enclosures" instance=ExtResource("2_q8qts")]
 position = Vector2(-328, -183)
 
+[node name="PanelContainer" parent="Enclosures/Enclosure5/BuyMenu" index="0"]
+offset_top = 443.0
+offset_bottom = 1031.0
+
+[node name="CleanContainer" parent="Enclosures/Enclosure5/BuyMenu" index="1"]
+offset_left = -92.0
+offset_top = 116.0
+offset_right = 121.0
+offset_bottom = 164.0
+
 [node name="Enclosure6" parent="Enclosures" instance=ExtResource("2_q8qts")]
 position = Vector2(108, -182)
 
+[node name="PanelContainer" parent="Enclosures/Enclosure6/BuyMenu" index="0"]
+offset_left = -253.0
+offset_top = 447.0
+offset_right = 1571.0
+offset_bottom = 1035.0
+
+[node name="CleanContainer" parent="Enclosures/Enclosure6/BuyMenu" index="1"]
+offset_left = -79.0
+offset_top = 102.0
+offset_right = 134.0
+offset_bottom = 150.0
+
 [node name="Enclosure7" parent="Enclosures" instance=ExtResource("2_q8qts")]
 position = Vector2(546.025, -182)
+
+[node name="PanelContainer" parent="Enclosures/Enclosure7/BuyMenu" index="0"]
+offset_left = -253.02504
+offset_top = 425.0
+offset_right = 1570.975
+offset_bottom = 1013.0
+
+[node name="CleanContainer" parent="Enclosures/Enclosure7/BuyMenu" index="1"]
+offset_left = -79.025024
+offset_top = 98.0
+offset_right = 133.97498
+offset_bottom = 146.0
 
 [node name="Enclosure8" parent="Enclosures" instance=ExtResource("2_q8qts")]
 position = Vector2(-767.85, -182)
 
 [node name="PanelContainer" parent="Enclosures/Enclosure8/BuyMenu" index="0"]
-offset_left = -93.15004
-offset_top = 1.0
-offset_right = 1730.85
-offset_bottom = 589.0
+offset_left = -111.15004
+offset_top = 469.0
+offset_right = 1712.85
+offset_bottom = 1057.0
+
+[node name="CleanContainer" parent="Enclosures/Enclosure8/BuyMenu" index="1"]
+offset_left = -81.150024
+offset_top = 86.0
+offset_right = 131.84998
+offset_bottom = 134.0
 
 [node name="Paths" type="Node2D" parent="."]
 unique_name_in_owner = true

@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="TutorialScene" load_steps=5 format=3 uid="uid://d0mn8nbao5jrl"]
+
+[ext_resource type="Script" uid="uid://dxx7fl4yjoea8" path="res://src/ui/TutorialScene.gd" id="1_vtn4k"]
+[ext_resource type="Texture2D" uid="uid://dtwgyom0x6ras" path="res://assets/TutorialScenes/ppSMILE.png" id="2_e1b32"]
+[ext_resource type="Texture2D" uid="uid://ry6hwjnevvat" path="res://assets/TutorialScenes/ppPRESENT.png" id="3_dqjd1"]
+[ext_resource type="Texture2D" uid="uid://dmauhvxc2rpxf" path="res://assets/TutorialScenes/ppAWK.png" id="4_n07ev"]
+
+[resource]
+script = ExtResource("1_vtn4k")
+sprites = Array[Texture2D]([ExtResource("2_e1b32"), ExtResource("3_dqjd1"), ExtResource("2_e1b32"), ExtResource("4_n07ev"), ExtResource("2_e1b32"), ExtResource("3_dqjd1"), ExtResource("3_dqjd1"), ExtResource("2_e1b32"), ExtResource("3_dqjd1"), ExtResource("3_dqjd1"), ExtResource("4_n07ev"), ExtResource("2_e1b32"), ExtResource("2_e1b32")])
+flip_sprite = Array[bool]([true, false, true, true, true, false, false, true, false, false, true, true, true])
+texts = Array[String](["Welcome, new employee! My name’s Professor Plum, let me give you a quick rundown on how things work here at The Interstellar Haven.", "Your job here is to manage the Haven- a zoo- remotely, with the power of your Plasma Pen. You can use it to catch wild creatures, buy and sell assets, and oversee the zoo- all without ever leaving your computer!", "On this screen you’ll be able to capture various alien animals. All you need to do is tap the critter with your Plasma Pen and hold until it falls from the sky. Try it now. (Don’t worry, it’s completely safe for them!)", " Probably.", "Some animals are harder to catch than others, but the more difficult ones are always more exciting to see in a zoo! And exciting animals means happy visitors!", " Thanks to our highly advanced gravity-powered sorting system, it’s also possible for you to find extra coins and food while capturing a critter.", "And here’s The Interstellar Haven itself! You’ll be able to see all your visitors, enclosures, and animals here. These lots are all empty, you’ll have to buy a new pen to show off the critters you capture. You can do so by clicking on any of the unused spaces.", "The more expensive enclosures can hold more animals, and impress more visitors. You can also buy food and sell creatures through the shop button. Having lots of animals and pens in the zoo is ideal. ", "The Haven will make more money when the visitors have more to look at! Your cleanliness and ability to care for the animals can also affect how much money The Interstellar Haven makes.", "Dirty enclosures will be easy to spot after a while, and can be cleaned up with a tap of your Plasma Pen.   ", "As for feeding, the critters will all be fed automatically in regular intervals, as long as you have enough food in your inventory for them. It is very important to make money and keep track of your food storage.", "You will lose your job if any of your critters die from starvation.", "Well! I think that’s about it! Have fun managing The Interstellar Haven, and good luck!"])
+node_visible = Dictionary[int, NodePath]({
+5: NodePath("BoxHighlight"),
+6: NodePath("ZooHighlight"),
+7: NodePath("ShopHighlight")
+})
+wait_moments = Dictionary[int, StringName]({
+2: &"tut_alien_collected",
+6: &"enclosure_purchased"
+})
+commands = Dictionary[int, StringName]({
+5: &"swap_view"
+})
+metadata/_custom_type_script = "uid://dxx7fl4yjoea8"

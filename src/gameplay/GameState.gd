@@ -19,3 +19,4 @@ func add_alien(type : Alien.AlienType) -> void:
 	aliens[type] += 1
 	print(aliens)
 	SignalBus.emit_alien_collected(type)
+	SignalBus.emit_tut_alien_collected()

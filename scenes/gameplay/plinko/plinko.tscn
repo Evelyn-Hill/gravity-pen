@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://nkbmpwpbnoft"]
+[gd_scene load_steps=12 format=3 uid="uid://nkbmpwpbnoft"]
 
 [ext_resource type="Script" uid="uid://cjpwbnc1uo2lh" path="res://src/gameplay/PlinkoBoard.gd" id="1_y80ct"]
 [ext_resource type="PackedScene" uid="uid://bdj5j41q1dpht" path="res://scenes/gameplay/plinko/plinko_goal.tscn" id="2_3v5wk"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://xybiv18vfj6s" path="res://assets/gameplay/spaceBG.streaks.png" id="4_bhtri"]
 [ext_resource type="Texture2D" uid="uid://cvvhp8n48ncum" path="res://assets/gameplay/spaceBG.planets.png" id="5_gd5cq"]
 [ext_resource type="Script" uid="uid://vfaooeal0q0k" path="res://src/gameplay/CollectionArea.gd" id="8_6kuqd"]
+[ext_resource type="Texture2D" uid="uid://donlmcuc4b001" path="res://assets/gameplay/plinkboardBACK.png" id="9_bhtri"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y80ct"]
 size = Vector2(20, 1084)
@@ -15,23 +16,93 @@ size = Vector2(20, 1084)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ymppl"]
 size = Vector2(2196, 20)
 
-[node name="Plinko" type="Node2D"]
+[node name="Plinko" type="Node2D" node_paths=PackedStringArray("goals")]
 script = ExtResource("1_y80ct")
+goals = [NodePath("PlinkoGoal2"), NodePath("PlinkoGoal7"), NodePath("PlinkoGoal9"), NodePath("PlinkoGoal5")]
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Static2" type="Sprite2D" parent="Node2D"]
+position = Vector2(1920, 0)
+texture = ExtResource("3_6kuqd")
+
+[node name="Static3" type="Sprite2D" parent="Node2D"]
+position = Vector2(0, 1080)
+texture = ExtResource("3_6kuqd")
+
+[node name="Static6" type="Sprite2D" parent="Node2D"]
+position = Vector2(1920, 1080)
+texture = ExtResource("3_6kuqd")
+
+[node name="Static7" type="Sprite2D" parent="Node2D"]
+position = Vector2(1920, -1080)
+texture = ExtResource("3_6kuqd")
+
+[node name="Static8" type="Sprite2D" parent="Node2D"]
+position = Vector2(-1920, -1080)
+texture = ExtResource("3_6kuqd")
+
+[node name="Static9" type="Sprite2D" parent="Node2D"]
+position = Vector2(-1920, 1080)
+texture = ExtResource("3_6kuqd")
+
+[node name="Static4" type="Sprite2D" parent="Node2D"]
+position = Vector2(0, -1080)
+texture = ExtResource("3_6kuqd")
+
+[node name="Static5" type="Sprite2D" parent="Node2D"]
+position = Vector2(-1920, 0)
+texture = ExtResource("3_6kuqd")
 
 [node name="Background" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("2_ymppl")
-parralax_amount_pixels = Array[float]([0.0, 75.0, 150.0])
-parralax_speed = Array[float]([0.0, 0.2, 0.3])
+parralax_amount_pixels = Array[float]([0.0, 50.0, 75.0, 150.0])
+parralax_speed = Array[float]([0.0, 0.05, 0.2, 0.3])
 
 [node name="Static" type="Sprite2D" parent="Background"]
 texture = ExtResource("3_6kuqd")
+
+[node name="Layer3" type="Sprite2D" parent="Background"]
+modulate = Color(1, 1, 1, 0.45490196)
+rotation = 3.1415927
+scale = Vector2(1, -1)
+texture = ExtResource("4_bhtri")
 
 [node name="Layer1" type="Sprite2D" parent="Background"]
 texture = ExtResource("4_bhtri")
 
 [node name="Layer2" type="Sprite2D" parent="Background"]
 texture = ExtResource("5_gd5cq")
+
+[node name="Layer3" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.50980395)
+position = Vector2(1294.9999, 39.999985)
+rotation = 1.6182114
+texture = ExtResource("4_bhtri")
+
+[node name="Layer4" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.50980395)
+position = Vector2(47.99997, -674.99994)
+rotation = -0.048700176
+texture = ExtResource("4_bhtri")
+
+[node name="Layer5" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.50980395)
+position = Vector2(-991.9999, -14.000122)
+rotation = 1.46395
+texture = ExtResource("4_bhtri")
+
+[node name="Layer6" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.50980395)
+position = Vector2(96, 806)
+rotation = -0.01471138
+texture = ExtResource("4_bhtri")
+
+[node name="PlinkoBackground" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, 281)
+texture = ExtResource("9_bhtri")
 
 [node name="EdgeLeft" type="StaticBody2D" parent="."]
 position = Vector2(-1000, 0)
@@ -46,20 +117,23 @@ position = Vector2(1000, 0)
 shape = SubResource("RectangleShape2D_y80ct")
 
 [node name="PlinkoGoal2" parent="." instance=ExtResource("2_3v5wk")]
-position = Vector2(-699, 545)
-reward = 1
+visible = false
+position = Vector2(-699, 518)
+my_reward = 1
 
 [node name="PlinkoGoal7" parent="." instance=ExtResource("2_3v5wk")]
-position = Vector2(-70, 536)
-reward = 3
+visible = false
+position = Vector2(-70, 522)
+my_reward = 2
 
 [node name="PlinkoGoal9" parent="." instance=ExtResource("2_3v5wk")]
-position = Vector2(85, 536)
-reward = 3
+visible = false
+position = Vector2(82, 522)
+my_reward = 3
 
 [node name="PlinkoGoal5" parent="." instance=ExtResource("2_3v5wk")]
-position = Vector2(706, 540)
-reward = 1
+visible = false
+position = Vector2(707, 521)
 
 [node name="AlienSpawn1" type="Node2D" parent="."]
 unique_name_in_owner = true

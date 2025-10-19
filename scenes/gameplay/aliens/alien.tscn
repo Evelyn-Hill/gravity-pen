@@ -19,6 +19,11 @@ shape = SubResource("CircleShape2D_4w6pr")
 
 [node name="Timer" type="Timer" parent="."]
 unique_name_in_owner = true
-wait_time = 10.0
+wait_time = 15.0
 one_shot = true
 autostart = true
+
+[node name="Timer2" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 15.0
+one_shot = true
