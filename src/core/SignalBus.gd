@@ -15,3 +15,7 @@ func emit_alien_collected(type: Alien.AlienType) -> void:
 signal enclosure_purchased()
 func emit_enclosure_purchased() -> void:
 	enclosure_purchased.emit()
+
+signal homeless_aliens_updated(aliens : Array[Alien.AlienType])
+func emit_homeless_aliens_updated(aliens : Array[Alien.AlienType]) -> void:
+	homeless_aliens_updated.emit(aliens)

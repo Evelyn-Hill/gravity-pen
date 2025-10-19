@@ -1,9 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://dpio6p7g4fwp3"]
+[gd_scene load_steps=9 format=3 uid="uid://dpio6p7g4fwp3"]
 
 [ext_resource type="Script" uid="uid://bpq4s08bnspwu" path="res://src/core/main.gd" id="1_2dmjg"]
 [ext_resource type="PackedScene" uid="uid://nkbmpwpbnoft" path="res://scenes/gameplay/plinko/plinko.tscn" id="4_b6u03"]
 [ext_resource type="Shader" uid="uid://c3uds5hq2y078" path="res://src/shaders/CRT.gdshader" id="5_ebys2"]
+[ext_resource type="Script" uid="uid://dmpl3kj00caio" path="res://src/ui/switch_button.gd" id="6_44pk5"]
 [ext_resource type="PackedScene" uid="uid://cqsntrp3afljc" path="res://scenes/gameplay/zoo/zoo.tscn" id="6_jvmw0"]
+[ext_resource type="Script" uid="uid://cvta4876hyjnd" path="res://src/ui/UnhousedAliensLabel.gd" id="7_44pk5"]
+[ext_resource type="Script" uid="uid://dde28ryty7kql" path="res://src/ui/coin_coint.gd" id="7_phv0v"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jvmw0"]
 shader = ExtResource("5_ebys2")
@@ -51,3 +54,41 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Button" type="Button" parent="UI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -210.0
+offset_top = 81.0
+offset_right = -101.0
+offset_bottom = 134.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 32
+text = "Switch
+"
+script = ExtResource("6_44pk5")
+
+[node name="Label" type="Label" parent="UI"]
+offset_left = 87.0
+offset_top = 95.0
+offset_right = 304.0
+offset_bottom = 174.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 40
+text = "Coins: "
+script = ExtResource("7_phv0v")
+
+[node name="Label2" type="Label" parent="UI"]
+offset_left = 87.0
+offset_top = 146.0
+offset_right = 304.0
+offset_bottom = 225.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 40
+text = "Unhoused Aliens: 0"
+script = ExtResource("7_44pk5")

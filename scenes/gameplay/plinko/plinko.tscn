@@ -64,8 +64,6 @@ reward = 3
 position = Vector2(706, 540)
 reward = 1
 
-[node name="Camera2D" type="Camera2D" parent="."]
-
 [node name="AlienSpawn1" type="Node2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(-1230, -270)

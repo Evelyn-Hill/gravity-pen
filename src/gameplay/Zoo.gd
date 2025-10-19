@@ -7,7 +7,6 @@ var paths : Array[Path2D]
 var patrons : Array[Patron]
 
 var homeless_aliens : Array[Alien.AlienType]
-
 var enclosure_aliens : Dictionary[Enclosure, Array]
 
 const PATRON_SCENE : PackedScene = preload("res://scenes/gameplay/zoo/Patron.tscn")
@@ -69,8 +68,7 @@ func distribute_aliens() -> void:
 			homeless_aliens.remove_at(homeless_aliens.find(alien))
 			enclosure_aliens[enclosure].append(alien)
 
-	print(enclosure_aliens)
-	print(homeless_aliens)
+	SignalBus.emit_homeless_aliens_updated(homeless_aliens)
 
 func on_enclosure_purchased() -> void:
 	distribute_aliens()
