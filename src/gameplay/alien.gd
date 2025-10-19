@@ -13,12 +13,14 @@ const ALIEN_SCORES : Array[int] = [1, 3, 5]
 const ALIEN_MOVE_SPEED : Array[float] = [150, 300, 400]
 
 # Contain paths to alien visual scenes.
-const ALIEN_VISUALS : Array[String] = [
-
+const ALIEN_VISUALS : Array[PackedScene] = [
+	preload("res://scenes/gameplay/aliens/boring_alien.tscn"),
+	preload("res://scenes/gameplay/aliens/awesome_alien.tscn"),
+	preload("res://scenes/gameplay/aliens/epic_alien.tscn")
 ]
 
 const amplitudes : Array[float] = [
-	2, 2, 2
+	2, 2, 3
 ]
 const frequencies : Array[float] = [
 	1, 2, 1
@@ -29,6 +31,11 @@ var time : float
 var my_alien_type : AlienType = AlienType.BORING
 var direction : Vector2 = Vector2(1, 0)
 var released : bool = false
+
+func _ready() -> void:
+	%Collider.disabled = true
+	pass
+	#%Timer.timeout.connect(func(): destroy())
 
 func Tick(delta: float) -> void:
 	if released:
@@ -43,7 +50,7 @@ func Tick(delta: float) -> void:
 	position += move_vector
 
 func release_rigidbody() -> void:
-	const vertical_force := -1.5
+	%Collider.disabled = false
 	const horizontal_force_max := 1
 	const horizontal_force_min := -1
 	const impulse_muliplier = 200
@@ -52,6 +59,11 @@ func release_rigidbody() -> void:
 	apply_central_impulse(random_vector * impulse_muliplier)
 	gravity_scale = 1.0
 	released = true
+
+func set_alien_type(type: AlienType) -> void:
+	my_alien_type = type
+	add_child(ALIEN_VISUALS[type].instantiate())
+
 
 func destroy() -> void:
 	PlinkoBoard.i.remove_alien(self)

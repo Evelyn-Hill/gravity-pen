@@ -33,9 +33,6 @@ texture = ExtResource("4_bhtri")
 [node name="Layer2" type="Sprite2D" parent="Background"]
 texture = ExtResource("5_gd5cq")
 
-[node name="PenTool" parent="." instance=ExtResource("3_ii6o4")]
-unique_name_in_owner = true
-
 [node name="EdgeLeft" type="StaticBody2D" parent="."]
 position = Vector2(-1000, 0)
 
@@ -66,11 +63,11 @@ reward = 1
 
 [node name="AlienSpawn1" type="Node2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-1230, -270)
+position = Vector2(-1333, -270)
 
 [node name="AlienSpawn2" type="Node2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(1245, -293)
+position = Vector2(1112, -293)
 
 [node name="CollectionArea" type="Area2D" parent="."]
 position = Vector2(0, 631)
@@ -78,3 +75,9 @@ script = ExtResource("8_6kuqd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollectionArea"]
 shape = SubResource("RectangleShape2D_ymppl")
+
+[node name="Aliens" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="PenTool" parent="." instance=ExtResource("3_ii6o4")]
+unique_name_in_owner = true

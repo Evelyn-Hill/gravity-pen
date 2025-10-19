@@ -1,119 +1,221 @@
-[gd_scene load_steps=7 format=3 uid="uid://cohsadqh0vfur"]
+[gd_scene load_steps=10 format=3 uid="uid://cohsadqh0vfur"]
 
 [ext_resource type="Script" uid="uid://bnx3tbqlox57u" path="res://src/gameplay/Enclosure.gd" id="1_e6rkq"]
 [ext_resource type="Texture2D" uid="uid://bsw6eb6meb2fk" path="res://assets/gameplay/zoo/enclosure1.bmp" id="1_tg3k8"]
 [ext_resource type="Texture2D" uid="uid://cdodb871m03xt" path="res://assets/gameplay/zoo/enclosure2.bmp" id="2_e6rkq"]
+[ext_resource type="Theme" uid="uid://c7umojkpyyytt" path="res://assets/GameTheme.tres" id="2_hkedq"]
 [ext_resource type="Texture2D" uid="uid://bw0xc7gyoisby" path="res://assets/gameplay/zoo/enclosure3.bmp" id="3_6evfv"]
 [ext_resource type="Texture2D" uid="uid://bmrq70rcdvhhb" path="res://assets/gameplay/stinkyOVERLAY1.png" id="5_6evfv"]
+[ext_resource type="Texture2D" uid="uid://b5hwtkrdrdw3g" path="res://assets/ui/coin_01.png" id="6_4uxqo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6evfv"]
+bg_color = Color(0.019607844, 0.14901961, 0.23921569, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.4862745, 0.827451, 0.7529412, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e6rkq"]
 size = Vector2(322, 348)
 
-[node name="Enclosure" type="Node2D" node_paths=PackedStringArray("enclosure_nodes", "purchase_buttons")]
+[node name="Enclosure" type="Node2D" node_paths=PackedStringArray("enclosure_nodes", "purchase_buttons", "purchase_labels", "v_separator")]
 script = ExtResource("1_e6rkq")
 enclosure_nodes = [NodePath("NONE"), NodePath("Desert"), NodePath("Jungle"), NodePath("Mountain")]
-purchase_buttons = [NodePath("BuyMenu/VBoxContainer/HBoxContainer/VBoxContainer/DesertButton"), NodePath("BuyMenu/VBoxContainer/HBoxContainer/VBoxContainer2/JungleButton"), NodePath("BuyMenu/VBoxContainer/HBoxContainer/VBoxContainer3/MountainButton")]
+purchase_buttons = [NodePath("BuyMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/DesertButton"), NodePath("BuyMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/JungleButton"), NodePath("BuyMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/MountainButton")]
+purchase_labels = [NodePath("BuyMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"), NodePath("BuyMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"), NodePath("BuyMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/HBoxContainer")]
+v_separator = [NodePath("BuyMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VSeparator"), NodePath("BuyMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VSeparator"), NodePath("BuyMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VSeparator2")]
 
 [node name="BuyMenu" type="Control" parent="."]
 unique_name_in_owner = true
 visible = false
-z_index = 1
+z_index = 2
 layout_mode = 3
-anchors_preset = 0
-offset_left = -180.0
-offset_top = -307.0
-offset_right = -140.0
-offset_bottom = -267.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -13.0
+offset_top = -333.0
+offset_right = -13.0
+offset_bottom = -333.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_hkedq")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="BuyMenu"]
+[node name="PanelContainer" type="PanelContainer" parent="BuyMenu"]
 layout_mode = 0
-offset_left = -5.0
-offset_right = 908.0
-offset_bottom = 393.0
+offset_left = -251.00002
+offset_top = 51.0
+offset_right = 1573.0
+offset_bottom = 639.0
 scale = Vector2(0.3, 0.3)
+theme_override_styles/panel = SubResource("StyleBoxFlat_6evfv")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BuyMenu/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="BuyMenu/PanelContainer"]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BuyMenu/PanelContainer/MarginContainer"]
+layout_mode = 2
 alignment = 1
 
-[node name="VBoxContainer" type="VBoxContainer" parent="BuyMenu/VBoxContainer/HBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BuyMenu/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 90
 
-[node name="DesertButton" type="TextureButton" parent="BuyMenu/VBoxContainer/HBoxContainer/VBoxContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(50, 50)
+[node name="VBoxContainer" type="VBoxContainer" parent="BuyMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="DesertButton" type="TextureButton" parent="BuyMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(75, 75)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 texture_normal = ExtResource("1_tg3k8")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="BuyMenu/VBoxContainer/HBoxContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BuyMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="BuyMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 96
-text = "50 Coins"
+theme_override_font_sizes/font_size = 128
+text = "50"
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="BuyMenu/VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="BuyMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+texture = ExtResource("6_4uxqo")
+
+[node name="VSeparator" type="VSeparator" parent="BuyMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="JungleButton" type="TextureButton" parent="BuyMenu/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="BuyMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="JungleButton" type="TextureButton" parent="BuyMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 texture_normal = ExtResource("2_e6rkq")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="BuyMenu/VBoxContainer/HBoxContainer/VBoxContainer2"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BuyMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="BuyMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 96
-text = "50 Coins"
+theme_override_font_sizes/font_size = 128
+text = "50"
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="VBoxContainer3" type="VBoxContainer" parent="BuyMenu/VBoxContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="BuyMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+texture = ExtResource("6_4uxqo")
+
+[node name="VSeparator2" type="VSeparator" parent="BuyMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="MountainButton" type="TextureButton" parent="BuyMenu/VBoxContainer/HBoxContainer/VBoxContainer3"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="BuyMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="MountainButton" type="TextureButton" parent="BuyMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 texture_normal = ExtResource("3_6evfv")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="BuyMenu/VBoxContainer/HBoxContainer/VBoxContainer3"]
+[node name="HBoxContainer" type="HBoxContainer" parent="BuyMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3"]
 layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="BuyMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 10
-theme_override_font_sizes/font_size = 96
-text = "50 Coins"
+theme_override_font_sizes/font_size = 128
+text = "50"
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="CleanButton" type="Button" parent="BuyMenu"]
+[node name="TextureRect" type="TextureRect" parent="BuyMenu/PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer3/HBoxContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+texture = ExtResource("6_4uxqo")
+
+[node name="CleanContainer" type="HBoxContainer" parent="BuyMenu"]
 unique_name_in_owner = true
 layout_mode = 0
-offset_left = 94.0
-offset_top = 497.0
-offset_right = 285.0
-offset_bottom = 539.0
+offset_left = -71.0
+offset_top = 482.0
+offset_right = 142.0
+offset_bottom = 530.0
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="CleanButton" type="Button" parent="BuyMenu/CleanContainer"]
+unique_name_in_owner = true
+layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Clean (10 Coins)"
+text = " Clean  Pen "
 
-[node name="CleanlinessSlider" type="VSlider" parent="BuyMenu"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(0, 150)
-layout_mode = 0
-offset_left = 365.0
-offset_top = 221.0
-offset_right = 381.0
-offset_bottom = 371.0
-editable = false
-scrollable = false
+[node name="HBoxContainer" type="HBoxContainer" parent="BuyMenu/CleanContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="BuyMenu/CleanContainer/HBoxContainer"]
+layout_mode = 2
+text = "10"
+
+[node name="TextureRect" type="TextureRect" parent="BuyMenu/CleanContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("6_4uxqo")
 
 [node name="ClickArea" type="Area2D" parent="."]
 unique_name_in_owner = true
@@ -139,3 +241,15 @@ texture = ExtResource("3_6evfv")
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0)
 texture = ExtResource("5_6evfv")
+
+[node name="Capacity" type="ProgressBar" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(150, 0)
+offset_left = -76.0
+offset_top = 133.0
+offset_right = 74.0
+offset_bottom = 160.0
+theme = ExtResource("2_hkedq")
+max_value = 15.0
+step = 1.0

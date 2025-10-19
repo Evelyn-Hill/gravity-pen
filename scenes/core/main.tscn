@@ -1,12 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://dpio6p7g4fwp3"]
+[gd_scene load_steps=13 format=3 uid="uid://dpio6p7g4fwp3"]
 
 [ext_resource type="Script" uid="uid://bpq4s08bnspwu" path="res://src/core/main.gd" id="1_2dmjg"]
 [ext_resource type="PackedScene" uid="uid://nkbmpwpbnoft" path="res://scenes/gameplay/plinko/plinko.tscn" id="4_b6u03"]
 [ext_resource type="Shader" uid="uid://c3uds5hq2y078" path="res://src/shaders/CRT.gdshader" id="5_ebys2"]
+[ext_resource type="Theme" uid="uid://c7umojkpyyytt" path="res://assets/GameTheme.tres" id="5_jpx65"]
+[ext_resource type="Texture2D" uid="uid://b5hwtkrdrdw3g" path="res://assets/ui/coin_01.png" id="5_ocd3q"]
 [ext_resource type="Script" uid="uid://dmpl3kj00caio" path="res://src/ui/switch_button.gd" id="6_44pk5"]
 [ext_resource type="PackedScene" uid="uid://cqsntrp3afljc" path="res://scenes/gameplay/zoo/zoo.tscn" id="6_jvmw0"]
-[ext_resource type="Script" uid="uid://cvta4876hyjnd" path="res://src/ui/UnhousedAliensLabel.gd" id="7_44pk5"]
+[ext_resource type="Texture2D" uid="uid://c06vixuvdvyiu" path="res://assets/ui/crab_meat.png" id="7_5xrq8"]
 [ext_resource type="Script" uid="uid://dde28ryty7kql" path="res://src/ui/coin_coint.gd" id="7_phv0v"]
+[ext_resource type="Script" uid="uid://bl7nqcl1um1wd" path="res://src/ui/FoodLabel.gd" id="8_phv0v"]
+[ext_resource type="Script" uid="uid://7laskpvc5uyu" path="res://src/ui/FoodCountdownBar.gd" id="9_fu2j5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jvmw0"]
 shader = ExtResource("5_ebys2")
@@ -24,7 +28,7 @@ shader_parameter/distort_intensity = 0.01600000076
 shader_parameter/noise_opacity = 0.0
 shader_parameter/noise_speed = 5.0
 shader_parameter/static_noise_intensity = 0.090000004275
-shader_parameter/aberration = 0.0010000475475000492
+shader_parameter/aberration = 0.00100004754750004
 shader_parameter/brightness = 1.1
 shader_parameter/discolor = true
 shader_parameter/warp_amount = 0.12800000608
@@ -44,6 +48,96 @@ zoo = NodePath("Zoo")
 [node name="Zoo" parent="." instance=ExtResource("6_jvmw0")]
 visible = false
 
+[node name="UI" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="SwapButton" type="Button" parent="UI"]
+unique_name_in_owner = true
+offset_left = 680.0
+offset_top = -481.0
+offset_right = 844.0
+offset_bottom = -428.0
+size_flags_vertical = 4
+theme = ExtResource("5_jpx65")
+theme_override_font_sizes/font_size = 48
+text = "To Zoo"
+script = ExtResource("6_44pk5")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -1862.0
+offset_top = -492.0
+offset_right = -1286.0
+offset_bottom = -428.0
+grow_horizontal = 2
+theme = ExtResource("5_jpx65")
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 23
+
+[node name="TextureRect" type="TextureRect" parent="UI/HBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("5_ocd3q")
+expand_mode = 1
+
+[node name="CoinLabel" type="Label" parent="UI/HBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 40
+text = "0"
+script = ExtResource("7_phv0v")
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UI/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 23
+
+[node name="TextureRect" type="TextureRect" parent="UI/HBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("7_5xrq8")
+expand_mode = 1
+
+[node name="FoodLabel" type="Label" parent="UI/HBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 40
+text = "Food: 0"
+script = ExtResource("8_phv0v")
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/HBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Label4" type="Label" parent="UI/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 24
+text = "Next Feeding"
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="UI/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(200, 25)
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 30.0
+value = 30.0
+show_percentage = false
+script = ExtResource("9_fu2j5")
+
 [node name="CRT" type="CanvasLayer" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="CRT"]
@@ -54,41 +148,3 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-
-[node name="UI" type="CanvasLayer" parent="."]
-
-[node name="Button" type="Button" parent="UI"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -210.0
-offset_top = 81.0
-offset_right = -101.0
-offset_bottom = 134.0
-grow_horizontal = 0
-theme_override_font_sizes/font_size = 32
-text = "Switch
-"
-script = ExtResource("6_44pk5")
-
-[node name="Label" type="Label" parent="UI"]
-offset_left = 87.0
-offset_top = 95.0
-offset_right = 304.0
-offset_bottom = 174.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 20
-theme_override_font_sizes/font_size = 40
-text = "Coins: "
-script = ExtResource("7_phv0v")
-
-[node name="Label2" type="Label" parent="UI"]
-offset_left = 87.0
-offset_top = 146.0
-offset_right = 304.0
-offset_bottom = 225.0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 20
-theme_override_font_sizes/font_size = 40
-text = "Unhoused Aliens: 0"
-script = ExtResource("7_44pk5")

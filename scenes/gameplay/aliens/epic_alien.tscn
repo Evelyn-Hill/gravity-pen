@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://fh5lngbm1ovf"]
+
+[ext_resource type="Texture2D" uid="uid://c1syvwa5wgvxh" path="res://assets/gameplay/aliens/epic.spritesheet.png" id="1_4ts80"]
+
+[sub_resource type="Animation" id="Animation_sg7xc"]
+resource_name = "Float"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_8o2si"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bm4bx"]
+_data = {
+&"Float": SubResource("Animation_sg7xc"),
+&"RESET": SubResource("Animation_8o2si")
+}
+
+[node name="EpicAlien" type="Sprite2D"]
+scale = Vector2(2, 2)
+texture = ExtResource("1_4ts80")
+offset = Vector2(-0.885, -6.91)
+hframes = 5
+vframes = 2
+frame = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_bm4bx")
+}
+autoplay = "Float"

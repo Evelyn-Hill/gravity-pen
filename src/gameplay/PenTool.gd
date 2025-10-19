@@ -22,7 +22,8 @@ var attack_enabled : bool = true
 func UpdateInput(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		start_position = event.position - (get_viewport_rect().size * 0.5)
-		if start_position.x > 730 and start_position.y < -400:
+
+		if start_position.y < -400:
 			attack_enabled = false
 		else:
 			attack_enabled = true

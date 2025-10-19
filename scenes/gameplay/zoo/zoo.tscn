@@ -1,8 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://cqsntrp3afljc"]
+[gd_scene load_steps=19 format=3 uid="uid://cqsntrp3afljc"]
 
 [ext_resource type="Texture2D" uid="uid://bpnau5b4sd33d" path="res://assets/gameplay/zoo/zooBG.bmp" id="1_huu4n"]
 [ext_resource type="Script" uid="uid://d3it0g1bvq531" path="res://src/gameplay/Zoo.gd" id="1_u70kq"]
 [ext_resource type="PackedScene" uid="uid://cohsadqh0vfur" path="res://scenes/gameplay/zoo/Enclosure.tscn" id="2_q8qts"]
+[ext_resource type="Script" uid="uid://c678ggudcm4yt" path="res://src/ui/Shop.gd" id="4_aosat"]
+[ext_resource type="Theme" uid="uid://c7umojkpyyytt" path="res://assets/GameTheme.tres" id="4_j7535"]
+[ext_resource type="Texture2D" uid="uid://cmrlt5su6pgy1" path="res://assets/gameplay/aliens/boringSHOP.png" id="5_ncuaj"]
+[ext_resource type="Texture2D" uid="uid://bphy4fx40dstf" path="res://assets/gameplay/aliens/epicSHOP.png" id="6_2wg7h"]
+[ext_resource type="Texture2D" uid="uid://b4gauyyiv3gfd" path="res://assets/gameplay/aliens/awesomeSHOP.png" id="6_aosat"]
+[ext_resource type="Script" uid="uid://bgcprnhipabw" path="res://src/ui/SellAlienButton.gd" id="7_rbc0r"]
+[ext_resource type="Script" uid="uid://pr72nqtfex1d" path="res://src/ui/FoodPanel.gd" id="10_4bd7q"]
 
 [sub_resource type="Curve2D" id="Curve2D_huu4n"]
 _data = {
@@ -28,26 +35,229 @@ _data = {
 }
 point_count = 18
 
+[sub_resource type="Animation" id="Animation_rbc0r"]
+resource_name = "Fade"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ShopPanel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.40000004),
+"transitions": PackedFloat32Array(0.22531264, 10.556066),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OpenButton:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.015625015, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%ShopPanel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/AlienPanel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"update_count"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("%ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/AlienPanel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"update_count"
+}]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("%ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/AlienPanel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer3")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"update_count"
+}]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("%ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/FoodPanel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"update_slider_value"
+}]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("%OpenButton:disabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_4bd7q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ShopPanel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OpenButton:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%ShopPanel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%OpenButton:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_edxao"]
+resource_name = "FadeOut"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ShopPanel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(0.16493945, 0.22531264),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OpenButton:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 0.015625015),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("%ShopPanel:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("%OpenButton:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_edxao"]
+_data = {
+&"Fade": SubResource("Animation_rbc0r"),
+&"FadeOut": SubResource("Animation_edxao"),
+&"RESET": SubResource("Animation_4bd7q")
+}
+
 [node name="Zoo" type="Node2D"]
 script = ExtResource("1_u70kq")
 
 [node name="Background" type="Sprite2D" parent="."]
 texture = ExtResource("1_huu4n")
-
-[node name="Paths" type="Node2D" parent="."]
-unique_name_in_owner = true
-
-[node name="Path1" type="Path2D" parent="Paths"]
-curve = SubResource("Curve2D_huu4n")
-
-[node name="Path2" type="Path2D" parent="Paths"]
-curve = SubResource("Curve2D_u70kq")
-
-[node name="Path3" type="Path2D" parent="Paths"]
-curve = SubResource("Curve2D_j7535")
-
-[node name="Path4" type="Path2D" parent="Paths"]
-curve = SubResource("Curve2D_wmvqi")
 
 [node name="Enclosures" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -75,6 +285,245 @@ position = Vector2(546.025, -182)
 
 [node name="Enclosure8" parent="Enclosures" instance=ExtResource("2_q8qts")]
 position = Vector2(-767.85, -182)
+
+[node name="PanelContainer" parent="Enclosures/Enclosure8/BuyMenu" index="0"]
+offset_left = -93.15004
+offset_top = 1.0
+offset_right = 1730.85
+offset_bottom = 589.0
+
+[node name="Paths" type="Node2D" parent="."]
+unique_name_in_owner = true
+z_index = 1
+
+[node name="Path1" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_huu4n")
+
+[node name="Path2" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_u70kq")
+
+[node name="Path3" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_j7535")
+
+[node name="Path4" type="Path2D" parent="Paths"]
+curve = SubResource("Curve2D_wmvqi")
+
+[node name="Shop" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+layer = 0
+visible = false
+follow_viewport_enabled = true
+script = ExtResource("4_aosat")
+
+[node name="Animation" type="AnimationPlayer" parent="Shop"]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_edxao")
+}
+
+[node name="ShopPanel" type="Control" parent="Shop"]
+unique_name_in_owner = true
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("4_j7535")
+
+[node name="CenterContainer" type="CenterContainer" parent="Shop/ShopPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -962.0
+offset_top = -542.0
+offset_right = -962.0
+offset_bottom = -542.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/ShopPanel/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Label" type="Label" parent="Shop/ShopPanel/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 50
+theme_override_font_sizes/font_size = 56
+text = "buyandsell.internet.com"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Shop/ShopPanel/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="AlienPanel" type="PanelContainer" parent="Shop/ShopPanel/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Shop/ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/AlienPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/AlienPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Shop/ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/AlienPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Sell an Alien!"
+
+[node name="HSeparator" type="HSeparator" parent="Shop/ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/AlienPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/AlienPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Shop/ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/AlienPanel/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("7_rbc0r")
+
+[node name="TextureRect" type="TextureRect" parent="Shop/ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/AlienPanel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("5_ncuaj")
+
+[node name="Count" type="Label" parent="Shop/ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/AlienPanel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Shop/ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/AlienPanel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "  Sell  "
+
+[node name="HSeparator" type="HSeparator" parent="Shop/ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/AlienPanel/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Shop/ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/AlienPanel/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("7_rbc0r")
+alien_type = 1
+
+[node name="TextureRect" type="TextureRect" parent="Shop/ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/AlienPanel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+texture = ExtResource("6_aosat")
+
+[node name="Count" type="Label" parent="Shop/ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/AlienPanel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Shop/ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/AlienPanel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "  Sell  "
+
+[node name="HSeparator2" type="HSeparator" parent="Shop/ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/AlienPanel/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Shop/ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/AlienPanel/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("7_rbc0r")
+alien_type = 2
+
+[node name="TextureRect" type="TextureRect" parent="Shop/ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/AlienPanel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+texture = ExtResource("6_2wg7h")
+
+[node name="Count" type="Label" parent="Shop/ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/AlienPanel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Shop/ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/AlienPanel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "  Sell  "
+
+[node name="FoodPanel" type="PanelContainer" parent="Shop/ShopPanel/CenterContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="Shop/ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/FoodPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/FoodPanel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="Shop/ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/FoodPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Purchase Food"
+
+[node name="HSeparator" type="HSeparator" parent="Shop/ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/FoodPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shop/ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/FoodPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Shop/ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/FoodPanel/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 1
+script = ExtResource("10_4bd7q")
+
+[node name="FoodSlider" type="HSlider" parent="Shop/ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/FoodPanel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+ticks_on_borders = true
+
+[node name="Button" type="Button" parent="Shop/ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/FoodPanel/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "  Buy  "
+
+[node name="FoodCostLabel" type="Label" parent="Shop/ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/FoodPanel/MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Costs:"
+horizontal_alignment = 1
+
+[node name="FoodNeededLabel" type="Label" parent="Shop/ShopPanel/CenterContainer/VBoxContainer/HBoxContainer/FoodPanel/MarginContainer/VBoxContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Food Needed:"
+horizontal_alignment = 1
+
+[node name="ExitButton" type="Button" parent="Shop/ShopPanel/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Exit"
+
+[node name="OpenButton" type="Button" parent="Shop"]
+unique_name_in_owner = true
+offset_left = -900.0
+offset_top = 423.0
+offset_right = -584.0
+offset_bottom = 484.0
+theme = ExtResource("4_j7535")
+theme_override_font_sizes/font_size = 56
+text = "  Open Shop  "
 
 [editable path="Enclosures/Enclosure1"]
 [editable path="Enclosures/Enclosure2"]

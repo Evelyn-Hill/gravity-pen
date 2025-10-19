@@ -8,6 +8,7 @@ enum ProgressState {
 	NONE,
 	PROGRESSING,
 	PAUSED,	
+	FINISHED,
 }
 
 var my_progress_state : ProgressState = ProgressState.PROGRESSING
@@ -17,12 +18,20 @@ const MAX_THINK_TIME : float = 7.0
 
 var think_points : Array[float]
 
+@export var possible_shirt_colors : Array[Color]
+
 func _ready() -> void:
+	%Shirt.modulate = possible_shirt_colors.pick_random()
 	var think_question : float = randf_range(0, 100)
 	if think_question < 75:
 		generate_think_points()
 
 func Tick(delta: float) -> void:
+	if progress_ratio >= 1:
+		my_progress_state = ProgressState.FINISHED
+		Zoo.i.remove_patron(self)	
+		self.queue_free()
+
 	if my_progress_state == ProgressState.PROGRESSING:
 		for think_point in think_points:
 			if is_equal_approx(progress_ratio / 100, think_point / 100):
@@ -41,4 +50,3 @@ func think() -> void:
 	await get_tree().create_timer(randf_range(MIN_THINK_TIME, MAX_THINK_TIME)).timeout
 	progress_ratio += path_speed
 	my_progress_state = ProgressState.PROGRESSING
-

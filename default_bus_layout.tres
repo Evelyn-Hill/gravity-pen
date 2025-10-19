@@ -11,6 +11,7 @@ attack_us = 2000.0
 release_ms = 60.0
 
 [resource]
+bus/0/mute = true
 bus/1/name = &"Mix"
 bus/1/solo = false
 bus/1/mute = false

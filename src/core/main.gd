@@ -6,6 +6,7 @@ enum GameView {
 	PLINKO,
 	ZOO,
 	PAUSE,		
+	TUTORIAL,
 }
 
 static var my_game_view : GameView = GameView.PLINKO
@@ -20,32 +21,33 @@ func _ready() -> void:
 	SignalBus.swap_view.connect(swap_view)
 
 func _process(delta: float) -> void:
-	zoo.BackgroundTick(delta)
-	
+
 	match my_game_view:
 		GameView.PLINKO:
 			plinko.Tick(delta)
-			pass
+			zoo.BackgroundTick(delta)
+			plinko.BackgroundTick(delta)
 		GameView.ZOO:
 			zoo.Tick(delta)
-			pass
+			zoo.BackgroundTick(delta)
+			plinko.BackgroundTick(delta)
 
 func _input(event: InputEvent) -> void:
 	match my_game_view:
 		GameView.PLINKO:
 			plinko.UpdateInput(event)
-			pass
 		GameView.ZOO:
 			zoo.UpdateInput(event)
-			pass
 	
 		
 func swap_view() -> void:
 	if my_game_view == GameView.PLINKO:
 		my_game_view = GameView.ZOO
+		%SwapButton.text = " To Space "
 		plinko.hide()
-		zoo.show()
+		zoo.display()
 	elif my_game_view == GameView.ZOO:
 		my_game_view = GameView.PLINKO
-		zoo.hide()
+		%SwapButton.text = " To Zoo "
+		zoo.undisplay()
 		plinko.show()
