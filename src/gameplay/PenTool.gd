@@ -98,7 +98,6 @@ func Tick(delta: float) -> void:
 		if attack_time <= 0:
 			%fire.play()	
 			Main.i.shake_camera()	
-			%Particles.emitting = true
 			var frames : Dictionary[Node, int] = evaluate_selection_frames()
 			for node in frames:
 				if frames[node] > frames.size() / 2:
@@ -120,12 +119,14 @@ func reset_attack(cooldown : bool) -> void:
 	circle_animation_progress = 0
 	attack_time = HOLD_TIME
 	my_plinko_state = PlinkoAnimEnum.WAITING
-	%Particles.emitting = false
 	if selection_frames.size() > 0:
 		selection_frames.clear()
 	circle_color = Color(1, 1, 1, 0.05)
 	if cooldown:
 		my_mouse_state = MouseState.COOLDOWN
+	else:
+		circle_outline_color = Color(0, 1, 0, 0.5)
+
 
 		
 func BackgroundTick(delta : float) -> void:	
