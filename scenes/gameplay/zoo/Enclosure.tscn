@@ -93,6 +93,27 @@ theme_override_font_sizes/font_size = 96
 text = "50 Coins"
 horizontal_alignment = 1
 
+[node name="CleanButton" type="Button" parent="BuyMenu"]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 94.0
+offset_top = 497.0
+offset_right = 285.0
+offset_bottom = 539.0
+theme_override_font_sizes/font_size = 24
+text = "Clean (10 Coins)"
+
+[node name="CleanlinessSlider" type="VSlider" parent="BuyMenu"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 0
+offset_left = 365.0
+offset_top = 221.0
+offset_right = 381.0
+offset_bottom = 371.0
+editable = false
+scrollable = false
+
 [node name="ClickArea" type="Area2D" parent="."]
 unique_name_in_owner = true
 

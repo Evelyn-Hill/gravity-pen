@@ -12,6 +12,13 @@ const ENCLOSURE_SCORE : Array[int] = [ 0, 1, 3, 5 ]
 
 const MAX_ALIENS : Array[int] = [ 0, 15, 35, 50 ]
 
+const MAX_CLEANLINESS : int = 100
+const MIN_CLEANLINESS : int = 0
+const DIRTY_THRESHOLD : int = 45
+const CLEANLINESS_SPEED : float = 0.2
+
+var cleanliness : float = MAX_CLEANLINESS
+
 @export var enclosure_nodes : Array[Node2D] 
 
 var selected_enclosure : EnclosureType = EnclosureType.NONE
@@ -25,6 +32,7 @@ var base_enclosure_cost : int = 50
 func _ready() -> void:
 	%ClickArea.mouse_entered.connect(func(): mouse_inside = true)
 	%ClickArea.mouse_exited.connect(func(): mouse_inside = false)
+	%CleanButton.pressed.connect(clean_enclosure)
 
 	for button in purchase_buttons:
 		connect_button_signals(button)
@@ -48,13 +56,21 @@ func handle_purchase_request(button : TextureButton) -> void:
 				SignalBus.emit_enclosure_purchased()
 				%BuyMenu.hide()
 
-
 func select_enclosure(type: EnclosureType) -> void:	
 	selected_enclosure = type	
 	enclosure_nodes[selected_enclosure].show()
 
 func get_enclosure_score() -> int:
 	return ENCLOSURE_SCORE[selected_enclosure]
+
+func BackgroundTick(delta : float) -> void:
+	if selected_enclosure != EnclosureType.NONE:
+		cleanliness -= delta * CLEANLINESS_SPEED
+		%CleanlinessSlider.value = cleanliness
+
+func clean_enclosure() -> void:
+	cleanliness = MAX_CLEANLINESS
+
 
 func UpdateInput(event: InputEvent) -> void:
 	if event.is_action_pressed("click") and mouse_inside:

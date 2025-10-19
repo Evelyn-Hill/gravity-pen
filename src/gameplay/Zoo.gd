@@ -41,6 +41,9 @@ func BackgroundTick(delta : float) -> void:
 	for patron : Patron in patrons:
 		patron.Tick(delta)
 
+	for enclosure in enclosure_aliens:
+		enclosure.BackgroundTick(delta)	
+
 func calculate_zoo_score() -> void:
 	pass
 
